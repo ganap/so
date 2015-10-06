@@ -1,0 +1,21 @@
+
+<div ng-show="!editMode"> 
+	<p>{{ngModel.name}}</p>
+	<p ng-if="ngModel.modality"> 
+		<b>Full code:</b>
+		<span ng-repeat="coding in ngModel.code.coding">{{coding.display}} </span>
+	</p>
+</div>
+
+<div ng-if="editMode" layout="column"> 
+		<md-input-container> 
+			<label> Medication Name </label>
+			<input type="text" ng-model="ngModel.name" ng-disabled="ngDisabled">
+		</md-input-container>
+		<div layout="row" ng-if="ngModel.code && !simpleMode"> 
+			<b> Coding:</b>
+			<fd-coding ng-repeat="coding in ngModel.code.coding"
+				ng-model="coding" edit-mode="true" ng-disabled="ngDisabled"> 
+			</fd-coding>
+		</div>
+</div>

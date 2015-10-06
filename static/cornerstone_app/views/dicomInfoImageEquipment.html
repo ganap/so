@@ -1,0 +1,107 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<b class="text-primary">Image Information</b>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				Rows: {{'x00280010' | dataDicomUint}}
+			</div>
+			<div class="col-xs-6">
+				Columns: {{'x00280011' | dataDicomUint}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Bits Allocated: {{'x00280100' | dataDicomUint}}>
+			</div>
+			<div class="col-xs-6">
+				Bits Stored: {{'x00280101' | dataDicomUint}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				HighBit: {{'x00280102' | dataDicomUint}}
+			</div>
+			<div class="col-xs-6">
+				Pixel Representation (0=us): {{'x00280103' | dataDicomUint}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Rescale Slope: {{'x00281053' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Rescale Intercept: {{'x00281052' | dataDicom}}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12">
+				Photometric Interpretation: {{'x00280004' | dataDicom}}
+			</div>
+			<div class="col-xs-12">
+				Image Type: {{'x00080008' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Image Position Patient: {{'x00200032' | dataDicom}}
+			</div>
+			<div class="col-xs-12">
+				Image Orientation Patient: {{'x00200037' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Pixel Spacing: {{'x00280030' | dataDicom}}
+			</div>
+			<div class="col-xs-12">
+				Samples Per Pixel: {{'x00280002' | dataDicomUint}}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<b class="text-primary">Equipment Information</b>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				Manufacturer: {{'x00080070' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Model: {{'x00081090' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Station Name: {{'x00081010' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				AE Title: {{'x00020016' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Institution Name: {{'x00080080' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Software Version: {{'x00181020' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				Implementation Version Name: {{'x0002001' | dataDicom}}
+			</div>
+		</div>
+	</div>
+</div>
+
+

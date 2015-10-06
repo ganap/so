@@ -1,0 +1,84 @@
+<style> 
+.cw-dicom-tool-btns > .btn-group{
+	display: inline-flex;
+	vertical-align:middle; 
+	text-aligh:center;
+}
+.cw-dicom-tool-btns.btn-group-vertical{
+	width: 10em;
+	z-index:1000;
+	margin-top:3em;
+}
+
+.cw-dicom-tool-btns .btn {
+	font-size: 0.8em;
+}
+.cw-dicom-tool-btns > .btn-group > .btn-danger{
+	padding:5px;
+	max-width: 2.5em;
+}
+</style>
+
+<div class="{{class}}btn-group-vertical cw-dicom-tool-btns">
+	<button class="btn btn-default btn-sm" ng-class="{'active':activeTool=='wwwc'}" ng-click="activate('wwwc')">
+		WW/WC
+	</button>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active':activeTool=='length'}"
+			ng-click="activate('length')">
+			Length
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('length')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active': activeTool=='probe'}"
+			ng-click="activate('probe')">
+			Probe
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('probe')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active': activeTool=='ellipticalRoi'}"
+			ng-click="activate('ellipticalRoi')">
+			Elliptical ROI
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('ellipticalRoi')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active': activeTool=='rectangleRoi'}"
+			ng-click="activate('rectangleRoi')">
+			Rectangle ROI
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('rectangleRoi')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active': activeTool=='freehand'}"
+			ng-click="activate('freehand')">
+			Freeform ROI
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('freehand')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<div class="btn-group"> 
+		<button class="btn btn-success btn-sm" ng-class="{'active': activeTool=='angle'}"
+			ng-click="activate('angle')">
+			Angle
+		</button>
+		<button class="btn btn-danger btn-sm" ng-click="clearTool('angle')">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</div>
+	<button class="btn btn-danger btn-sm" ng-click="clearAllTools()">
+		<span class="glyphicon glyphicon-remove"></span>
+		CLEAR ALL
+	</button>
+</div>

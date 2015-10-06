@@ -1,0 +1,36 @@
+	<md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Profile">
+        <md-content>
+			<cw-patient-profile profile="patient.patient" kiosk-mode="kioskMode"></cw-patient-profile>
+        </md-content>
+      </md-tab>
+	  <md-tab label="Medications / Treatments" ng-if="!userProfile.user.is_moderator"> 
+		<md-content layout-padding> 
+			<fd-medications-and-treatments patient="patient" kiosk-mode="kioskMode"> 
+			</fd-medications-and-treatments>
+		</md-content>
+	  </md-tab>	  
+	  <md-tab label="Health Record" ng-if="!userProfile.user.is_moderator"> 
+		<md-content layout-padding> 
+			<fd-health-records patient="patient">  </fd-health-records>
+		</md-content>
+	  </md-tab>
+      <md-tab label="Documents" ng-if="!userProfile.user.is_moderator">
+        <md-content>
+			<cw-emr-management user-pk="patient.pk" hide-delete-btn="true"
+				ng-show="patient.pk" kiosk-mode="kioskMode">
+			</cw-emr-management>
+        </md-content>
+      </md-tab>
+      <md-tab label="Device data" ng-if="!userProfile.user.is_moderator">
+        <md-content >
+		</md-content>
+	  </md-tab>
+	  <md-tab label="Second Opinion"> 
+		<md-content layout-padding> 
+			<so-diagnosis user-pk="patient.pk" view-mode="userProfile.user.is_moderator"> 
+			</so-diagnosis>
+		</md-content>
+	  </md-tab>
+    </md-tabs>
+

@@ -1,0 +1,8 @@
+<md-input-container>
+	<label>Treatment</label>
+	<md-select ng-model="ngModel">
+	<md-option value="{{obj.obj}}" ng-repeat="obj in treatment_list track by $index">
+			{{ obj.name }}
+		</md-option>
+	</md-select>
+</md-input-container>

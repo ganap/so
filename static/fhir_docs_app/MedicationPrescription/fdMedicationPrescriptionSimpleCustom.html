@@ -1,0 +1,23 @@
+<div ng-if="editMode"> 
+	<div layout="column" layout-padding> 
+		<fd-medication ng-model="ngModel.medication" edit-mode="true" 
+			ng-disabled="ngDisabled"
+			simple-mode="true">  
+		</fd-medication>
+	</div>
+	<fd-dosage-instruction ng-model="ngModel.dosageInstruction[0]" 
+		ng-disabled="ngDisabled"
+		edit-mode="true" simple-mode="true"> 
+	</fd-dosage-instruction>
+	<div layout="column" layout-padding style="padding-top:0px;"> 
+		<md-input-container> 
+			<label> How taken? </label>
+			<input type="text" ng-model="ngModel.CUSTOM_method" ng-disabled="ngDisabled">
+		</md-input-container>
+		<md-input-container> 
+			<label> Instructions </label>
+			<textarea ng-model="ngModel.CUSTOM_instructions" ng-disabled="ngDisabled"></textarea>
+		</md-input-container>
+	</div>
+</div>
+

@@ -1,0 +1,33 @@
+<div layout="row"> 
+	<h6> Treatment <span ng-if="bundle.entry.length-1>0 && !viewMode"> (+{{bundle.entry.length-1}})</span></h6>
+	<span flex></span>
+</div>
+<div layout="row" ng-if="!viewMode && latest.type_"> 
+	<b>{{const.getKeyByVal('TREATMENT_TYPES_CUSTOM_TYPES', latest.type_)}}  </b> 
+	<fd-treatment-main-text ng-model="latest" style="padding-left:0.2em;"></fd-treatment-main-text>
+	<span flex></span>
+</div>
+<div layout="column" ng-if="viewMode"> 
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Treatment</th>
+				<th>Summary</th>
+				<th>Additional text</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="treatment in bundle.entry">
+			<td>	
+				{{const.getKeyByVal('TREATMENT_TYPES_CUSTOM_TYPES', treatment.content.type_)}}
+			</td>
+			<td>
+				<fd-treatment-main-text ng-model="treatment.content"></fd-treatment-main-text>
+			</td>
+			<td> 
+				<fd-treatment-additional-text ng-model="treatment.content"></fd-treatment-additional-text>
+			</td>
+		</tr>
+		</tbody>
+	</table>	
+</div>

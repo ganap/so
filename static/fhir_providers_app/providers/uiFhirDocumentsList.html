@@ -1,0 +1,27 @@
+<md-input-container ng-if="currentProvider.patients_list.length"> 
+	<label> Search (type name, email, birthdate, etc.) </label>
+	<input type="text" ng-model="currentProvider.searchString"></input>
+</md-input-container>
+<md-card ng-repeat="obj in currentProvider.patients_list | filter: currentProvider.searchString" 
+	ng-if="!currentProvider.loading" class="providerPatient" layout-padding> 
+	<div class="name">
+		<span ng-if="obj.gender=='female'"><i class="fa fa-venus"></i></span>
+		<span ng-if="obj.gender=='male'"><i class="fa fa-mars"></i></span>
+		<span ng-if="obj.gender=='other'"><i class="fa fa-fa-transgender-alt"></i></span>
+		<span ng-if="obj.gender=='unknown'"><i class="fa fa-fa-genderless"></i></span>
+		<span ng-repeat="suffix in obj.name[0].suffix">{{suffix}} </span>
+		<span ng-repeat="given in obj.name[0].given">{{given}} </span>
+		<span ng-repeat="family in obj.name[0].family">{{family}} </span>
+		<span ng-repeat="prefix in obj.name[0].prefix">{{prefix}} </span>
+	</div>
+	<p ng-if="obj.birthDate">Birthday: {{obj.birthDate | date : 'd MMM yyyy'}}  </p>
+	<div class="md-actions" layout="row" layout-align="end center" ng-if="!showEdit">
+		<md-button class="md-primary nomargin-top-bottom" ng-click="createProfile(obj)">
+			View	
+		</md-button>	
+	</div>
+</md-card>
+
+<br>
+<br>
+<spinner-loader ng-show="currentProvider.loading" label="Please wait..."></spinner-loader>

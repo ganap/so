@@ -1,0 +1,14 @@
+<span ng-if="ngModel.type_=='r'"> 
+	<span ng-if="ngModel.radiation.type_" style="padding-left:0.2em;"> 
+		{{ngModel.radiation.type_}}<span ng-if="ngModel.radiation.dosage">/{{ngModel.radiation.dosage}}</span>
+	</span>
+</span>
+<span ng-if="ngModel.type_=='c'"> 
+	{{ngModel.chemotherapy.regiment || '-'}}
+</span>
+<span ng-if="ngModel.type_=='s'"> 
+	{{ngModel.surgery.type_ || '-'}}
+</span>
+<span ng-if="ngModel.type_=='a'"> 
+	{{ngModel.alternative.type_ || '-'}}
+</span>

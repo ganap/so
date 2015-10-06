@@ -1,0 +1,45 @@
+<div layout="row"> 
+	<h6> Medication <span ng-if="bundle.entry.length-1>0 && !viewMode"> (+{{bundle.entry.length-1}})</span></h6>
+	<span flex></span>
+</div>
+<div layout="row" ng-if="!viewMode && latest.medication"> 
+	<fd-medication ng-model="latest.medication">  
+	</fd-medication>	
+	<fd-dosage-instruction ng-model="latest.dosageInstruction[0]" style="padding-left:0.2em;">
+	</fd-dosage-instruction>	
+</div>
+<div layout="column" ng-if="viewMode"> 
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Medication</th>
+				<th>Dosage (Frequency)</th>
+				<th>Method</th>
+				<th>Started on</th>
+				<th>Ended on</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="prescription in bundle.entry">
+			<td>	
+				<fd-medication ng-model="prescription.content.medication">  
+				</fd-medication>
+			</td>
+			<td>
+				<fd-dosage-instruction ng-model="prescription.content.dosageInstruction[0]">
+				</fd-dosage-instruction>	
+			</td>
+			<td>
+				{{prescription.content.CUSTOM_method || '-'}}
+			</td>
+			<td> 
+				{{(prescription.content.dosageInstruction[0].timingSchedule.event[0].start | date: 'd/ MMM /yyyy') || '-'}}
+			</td>
+			<td> 
+				{{(prescription.content.dosageInstruction[0].timingSchedule.event[0].end | date: 'd/ MMM /yyyy') || '-'}}
+				
+			</td>
+		</tr>
+		</tbody>
+	</table>	
+</div>

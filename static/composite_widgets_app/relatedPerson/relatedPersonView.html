@@ -1,0 +1,29 @@
+<line label="{{person.name.given[0]}} {{person.name.family[0]}} ({{person.gender}})"
+	ng-if="showLabel">
+</line>
+
+<div>
+	<div ng-repeat="l in person.relationship"
+		class="label label-info" style="margin-right:1em; margin-bottom:0.3em;"> 
+		{{l}}
+	</div>
+</div>
+
+<b class="text-primary" ng-if="person.address">Address:</b>
+<cw-address-view address="person.address" ng-if="person.address"> 
+</cw-address-view>
+<hr ng-if="person.address">
+
+<b class="text-primary" ng-if="person.telecom.length">Contacts:</b>
+<div ng-if="person.telecom.length" ng-repeat="contact in person.telecom"> 
+	<b>#{{$index+1}}</b>
+	<cw-contact-point-view contact="contact">
+	</cw-contact-point-view>
+</div>
+<hr ng-if="person.telecom.length">
+
+<b ng-if="person.period">Период времени, в течение которого с этим контактным лицом можно связываться</b>
+<cw-period period="person.period" ng-if="person.period"> 
+</cw-period>
+<hr ng-show="person.period">
+

@@ -1,0 +1,288 @@
+<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"> 
+	<error ng-model="userProfile.error"></error>
+
+	<div ng-show="tab=='sex'">
+		<h4> <b>1/5</b> Please select your sex </h4>
+		<br>
+
+		<div class="media media-radio" ng-click="sex='male'">
+			<div class="media-left">
+				<img class="media-object" src="/static/img/sex/gender-male.png" style="width:40px;">
+			</div>
+			<div class="media-body">
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" ng-model="sex" value="male">
+						I'm a man
+					</label>
+				</div>
+			</div>
+		</div>
+		<!---->
+		<div class="media media-radio" ng-click="sex='female'">
+			<div class="media-left">
+				<img class="media-object" src="/static/img/sex/gender-female.png" style="width:40px;">
+			</div>
+			<div class="media-body">
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" ng-model="sex" value="female">
+						I'm a woman
+					</label>
+				</div>
+			</div>
+		</div>
+		<!---->
+		<div class="media media-radio" ng-click="sex='other'">
+			<div class="media-left">
+				<img class="media-object" src="/static/img/sex/gender-male-female.png" style="width:40px;">
+			</div>
+			<div class="media-body">
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" ng-model="sex" value="other">
+						Other	
+					</label>
+				</div>
+			</div>
+		</div>
+		<!---->
+		<div class="media media-radio" ng-click="sex='unknown'">
+			<div class="media-left">
+				<img class="media-object" src="/static/img/sex/gender-unknown.png" style="width:40px;">
+			</div>
+			<div class="media-body">
+				<div class="radio">
+					<label>
+						<input type="radio" name="optionsRadios" ng-model="sex" value="unknown">
+						Unknown (I do not want to provde this information)	
+					</label>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-success fright" ng-click="tab='human-info'">
+			NEXT
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		<br>
+		<br>
+	</div>
+
+
+	<div ng-show="tab=='human-info'"> 
+		<h4> <b>2/5</b> Please provide brief information about yourself </h4>
+		<br>
+
+		<cw-human-name human="humanName" label="My Name" 
+			hide-delete-btn="true"
+			hide-bottom-btns="true">
+		</cw-human-name>
+		<line label="My date of birth (not mandatory)">  </line>
+		<div class="form-group">
+			<birthday-picker birthday-iso="birthday" min-age="10" max-age="100"
+					btn-class="form-control">
+			</birthday-picker>
+		</div>
+		<br>
+		<line label="My marital status">  </line>
+		<div class="form-group">
+			<const-select ng-model="maritalStatus" model-type="MARITAL_STATUS_TYPES"> 
+			</const-select>
+		</div>
+		<br>
+		<button class="btn btn-success fright" ng-click="tab='photo'" 
+			ng-disabled="!humanName.family[0].length || !humanName.given[0].length">
+			NEXT
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		<br>
+		<br>
+	</div>
+
+	<div ng-show="tab=='photo'"> 
+		<h4> <b>3/5</b> Upload your photo (this step is optional, can be skipped) </h4>
+		<br>
+		<p> Please select the profile photo, that shows your face </p>
+		<br>
+		<div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 center"> 
+			<picture-picker image="photo"></picture-picker>
+		</div>
+		<br>
+		<br>
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nopadding"> 
+			<button class="btn btn-success fright" ng-click="tab='contacts'">
+				NEXT
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</button>
+			<br>
+			<br>
+		</div>
+	</div>
+
+	<div ng-show="tab=='contacts'">
+		<h4> <b>4/5</b> Please specify the contacts to reach you</h4>
+		<br>
+		<p> You can skip this step and the ony way to communicate with you will be a mailbox which was used when registering your profile.  </p>
+		<small> These details are not public, unlike the data that you have provided on the previous pages. Add  your care contacts here: mobile phones, fax, emails, links to facebook, twitter, etc.  </small>
+		<cw-contact-point contact="contact" label="My Contact"
+				hide-delete-btn="true"
+				hide-bottom-btns="true">
+		</cw-contact-point>
+		<div ng-repeat="c in contacts">
+			<cw-contact-point contact="c" label="My Contact #{{$index+2}}" 
+				on-delete="deleteContact($index)">
+			</cw-contact-point>
+		</div>
+		<hr>
+		<button class="btn btn-primary btn-block btn-sm" ng-click="addNewContact()">
+			<span class="glyphicon glyphicon-plus"></span>
+			ADD ANOTHER CONTACT
+		</button>
+		<br>
+		<br>
+		<button class="btn btn-success fright" ng-click="tab='address'" ng-disabled="!contact.value">
+			NEXT
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		<br>
+		<br>
+	</div>
+	
+	
+	
+	<div ng-show="tab=='address'"> 
+		<h4> <b> 5/5 </b> Please specify the adress where you could be found </h4>
+		<br>
+		<p> It is recommended to specify the home adress </p>
+		<cw-address address="address" label="My Main Address"
+				hide-delete-btn="true"
+				hide-bottom-btns="true">
+		</cw-address>
+		<br>
+		<br>
+		<button class="btn btn-success fright" ng-click="tab='summary'">
+			NEXT
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+		<br>
+		<br>
+	</div>
+
+
+
+
+	<div ng-show="tab=='summary'">
+		<h4> <b>Thats all!</b> Now you can complete registration</h4>
+		<br>
+		<p> You can view and validate a summary of all the <a href="javascript:void(0)" ng-click="showSummary=true">data</a> provided. </p>
+		<small> Any other information on your profile, you can fill in later by selecting the menu at the top of the page. </small>
+
+
+		<div ng-if="showSummary"> 
+			<br>
+			<br>
+
+			<cw-human-name human="humanName" label="My Name" 
+				hide-delete-btn="true"
+				hide-bottom-btns="true">
+			</cw-human-name>
+
+			<line label="My date of birth (not mandatory)">  </line>
+			<div class="form-group">
+				<birthday-picker birthday-iso="birthday" min-age="10" max-age="100"
+					btn-class="form-control">
+				</birthday-picker>
+			</div>
+			<br>
+			<line label="My marital status">  </line>
+			<div class="form-group">
+				<const-select ng-model="maritalStatus" model-type="MARITAL_STATUS_TYPES"> 
+				</const-select>
+			</div>
+			<br>			
+			
+			<cw-contact-point contact="contact" label="My Contact"
+				hide-delete-btn="true"
+				hide-bottom-btns="true">
+			</cw-contact-point>
+
+			<div ng-repeat="c in contacts">
+				<cw-contact-point contact="c" label="My Contact #{{$index+2}}" 
+					on-delete="deleteContact($index)">
+				</cw-contact-point>
+			</div>
+			
+			<hr>
+			
+			<button class="btn btn-primary btn-block btn-sm" ng-click="addNewContact()">
+				<span class="glyphicon glyphicon-plus"></span>
+				ADD ANOTHER CONTACT
+			</button>			
+			<br>
+			<cw-address address="address" label="My Main Address"
+				hide-delete-btn="true"
+				hide-bottom-btns="true">
+			</cw-address>
+		</div>
+		<br>
+		<br>
+		<br>
+		
+		<button class="btn btn-success fright" ng-click="registrationComplete()"
+			ng-disabled="!humanName.family[0].length || !humanName.given[0].length || !contact.value">
+			<span class="glyphicon glyphicon-ok-circle"></span>
+			COMPLETE THE REGISTRATION
+		</button>
+
+		<br>
+		<br>
+	</div>
+
+
+	<div ng-if="tab=='create-profile'"> 
+		<div ng-if="creatingAccount" class="center"> 
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="whirly-loader">
+				Please wait…
+			</div>		
+			<br>
+			<br>
+			<h3> Creating account... </h3>
+		</div>
+		<div ng-if="uploadingPhoto" class="center"> 
+			<br>
+			<br>
+			<br>
+			<br>
+			<div class="whirly-loader">
+				Please wait…
+			</div>		
+			<br>
+			<br>
+			<h3> Uploading photo... </h3>
+		</div>
+	</div>
+
+	<div ng-if="error" class="center"> 
+		<br>
+		<br>
+		<br>
+		<br>
+		<h3> <b> Ooops! </b> {{error}}</h3>
+		<br>
+		<br>
+		<br>
+		<button class="btn btn-warning" ng-click="registrationComplete()">
+			TRY AGAIN
+		</button>
+		<br>
+		<br>
+		<br>
+	</div>
+
+
+</div>

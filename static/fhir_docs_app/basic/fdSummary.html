@@ -1,0 +1,24 @@
+	<md-card layout-padding class="providerPatient">
+		
+		<div ng-include="templateUrl"></div>
+
+		<div class="md-actions" layout="row" layout-align="end center">
+			<md-button class="md-primary nomargin-top-bottom" ng-click="onAddClick()"
+				ng-if="onAddClick" ng-hide="kioskMode"> 
+				Add New	
+			</md-button>
+			
+			<md-button class="md-primary nomargin-top-bottom" ng-click="onViewClick()"
+				ng-if="viewMode"> 
+				Hide View Mode
+			</md-button>
+			<md-button class="md-primary nomargin-top-bottom" ng-click="onViewClick()"
+				ng-if="!viewMode && !error"> 
+				View
+			</md-button>
+			<md-button class="md-primary nomargin-top-bottom" ng-click="onEditClick()"
+				ng-if="!error">
+				Details	
+			</md-button>	
+		</div>		
+	</md-card>

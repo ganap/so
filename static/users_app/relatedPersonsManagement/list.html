@@ -1,0 +1,47 @@
+<div layout="column"> 
+	<error ng-model="error"></error>
+	<ul class="list-inline"> 
+		<li> 
+		<h6 class="h6-spesial"> This page contains all contacts of people who care about you</h6>
+		</li>
+	</ul>
+
+	<div ng-show="!persons_list.length && !loading" class="center"> 
+		<br>
+		<br>
+		<h5 class="text-danger"> There are no people in this list yet. </h5>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<div ng-show="loading"> 
+		<spinner-loader label="Downloading people info"
+			ng-show="loading">
+		</spinner-loader>
+	</div>
+
+<!--
+	<div ng-show="persons_list.length"> 
+		<cw-related-person-small-view ng-repeat="person in persons_list"
+			person="person" on-delete="delete(person)" 
+			url="#/patient/related-persons/edit/{{person.pk}}"> 
+		</cw-related-person-small-view>
+	</div>
+	-->
+
+	<md-button class="md-fab md-btn-bottom-right-fixed" ng-href="#/patient/related-persons/create">
+			<md-icon style="color:white;">add</md-icon>
+			<md-tooltip> 
+				Add Member
+			</md-tooltip>
+	</md-button>	
+
+<div layout="column"> 
+<d3-force-care-team-chart style="min-height:400px; min-width:400px;"
+	links="links" nodes="nodes" on-node-click="onNodeClick(person)"
+	flex> 
+	
+</d3-force-care-team-chart>
+</div>
+</div>

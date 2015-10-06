@@ -1,0 +1,17 @@
+<div > 
+	<error ng-model="error">  </error>
+
+	<div ng-show="loading"> 
+		<br>
+		<br>
+		<br>
+		<spinner-loader label="Retrieving info"
+			ng-show="loading">
+		</spinner-loader>
+	</div>	
+	
+	<cw-related-person person="person" btn-save-label="UPDATE INFO"
+		on-save="updatePerson()" ng-show="!loading"> 
+	</cw-related-person>
+
+</div>

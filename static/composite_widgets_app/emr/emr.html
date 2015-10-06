@@ -1,0 +1,63 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 patient-emrs" style="padding-top:4px;"> 
+	<div class="contentWrapper" style="min-height:12em;">
+		<ul class="list-inline erm-navbar" ng-show="!currentAttachment && !kioskMode"> 
+			<li> 
+			<h6>Upload additional documents</h6>
+			</li>
+			<li> 
+			<cw-upload-dropdown on-upload-complete="onUploadComplete(data)" user-pk="userPk">
+			</cw-upload-dropdown>
+			</li>
+		</ul>
+		<ul class="list-inline erm-navbar" ng-if="currentAttachment"> 
+			<li> 
+				<md-button class="md-primary md-sm nomargin-top-bottom" ng-click="unsetCurrentAttachment()"> 
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					Back to All EMRs
+				</md-button>
+			</li>
+			<li ng-show="!fullscreen"> 
+				<md-button class="md-raised md-sm nomargin-top-bottom" ng-click="goFullscreen()"> 
+					<span class="glyphicon glyphicon-fullscreen"></span>
+					Fullscreen	
+				</md-button>
+			</li>
+			<li> 
+			<b class="text-primary">{{currentAttachment.title}}</b>
+			</li>
+			<li> 
+			<button class="btn btn-danger btn-sm" ng-click="deleteAttachment(currentAttachment)"
+				ng-hide="hideDeleteBtn">
+				<span class="glyphicon glyphicon-trash"></span>
+				DELETE
+			</button>
+			</li>
+			<li ng-show="currentAttachment.ext=='.dcm' || currentAttachment.ext=='.dicom'"> 
+				<cw-dicom-invert-btn> 
+				</cw-dicom-invert-btn>
+				<cw-dicom-interpolation-btn> 
+				</cw-dicom-interpolation-btn>				
+				<cw-dicom-info-btn> 
+				</cw-dicom-info-btn>
+			</li>
+		</ul>
+		<hr ng-show="fullscreen">
+
+		<cw-attachment-view attachment="currentAttachment"
+			ng-if="currentAttachment">
+		</cw-attachment-view>
+
+		<small ng-hide="currentAttachment || kioskMode">Here you can upload any additional documents (scanned) you received from your Doctors’ office. This may include your EMR in scanned format, images, dicom files etc.</small>
+		<div ng-hide="currentAttachment">
+						
+			<cw-attachment-thumb ng-repeat="a in attachments"
+				attachment="a" ng-click="setCurrentAttachment(a)">
+			</cw-attachment-thumb>
+			<div ng-show="!attachments.length"> 
+				<br>
+				<h5 class="text-danger center"> There's nothing here </h5>
+			</div>
+		</div>
+		<div>
+
+</div>

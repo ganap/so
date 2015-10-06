@@ -1,0 +1,33 @@
+<div layout="column" layout-padding> 
+	<error ng-model="error"></error>
+	<md-input-container> 
+		<label>Search (type name, birthdate, email, etc.)</label>
+		<input type="text" ng-model="searchString" >
+	</md-input-container>
+	<md-card layout-padding ng-repeat="patient in patient_list | filter: searchString" class="providerPatient">
+		<div class="name">
+			<span ng-if="patient.patient.gender=='female'"><i class="fa fa-venus"></i></span>
+			<span ng-if="patient.patient.gender=='male'"><i class="fa fa-mars"></i></span>
+			<span ng-if="patient.patient.gender=='other'"><i class="fa fa-fa-transgender-alt"></i></span>
+			<span ng-if="patient.patient.gender=='unknown'"><i class="fa fa-fa-genderless"></i></span>				
+			<span>{{patient.patient.name[0].prefix[0]}} {{patient.patient.name[0].given[0]}} {{patient.patient.name[0].family[0]}}  {{patient.patient.name[0].suffix[0]}} </span>
+		</div>
+		<p ng-if="patient.patient.birthDate">Birthday: {{patient.patient.birthDate | date: 'd MMM yyyy'}}  </p>
+		<div class="md-actions" layout="row" layout-align="end center">
+			<md-button class="md-primary nomargin-top-bottom" 
+				ng-click="dialogsAndVideoIm.startChatWith(patient)">
+				Chat	
+			</md-button>				
+			<md-button class="md-primary nomargin-top-bottom" ng-href="#/coordinator/patients/edit/{{patient.pk}}">
+				Edit	
+			</md-button>	
+		</div>		
+	</md-card>
+</div>
+			
+<md-button class="md-fab md-btn-bottom-right-fixed" 
+	ng-href="#/coordinator/patients/create">
+	<md-icon style="color:white;">add</md-icon>
+</md-button>
+
+

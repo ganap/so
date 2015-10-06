@@ -1,0 +1,92 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+{% block angular_app %}
+<html lang="en" ng-app="App">
+{% endblock %}
+
+{% block css_js_load %}
+<!-- datetime picker -->
+<script src="/static/libs/bower_components/moment/min/moment.min.js"></script>
+<script src="/static/libs/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/static/libs/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"> 
+<link rel="stylesheet" href="/static/whirly.css"> 
+{% load_ng_app 'helpers' %}
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'composite_widgets_app' %}
+{% load_ng_app 'im_app' %}
+{% load_ng_app 'users_app' %}
+{% load_ng_app 'so_app' %}
+{% load_ng_app 'fhir_docs_app' %}
+{% load_ng_app 'admin_app' %}
+
+{% endblock %}
+
+{% block sidenav_top_btn %}
+<div class="dropdown">
+	<md-button class="md-primary notext-transform" id="profileDropdown" data-toggle="dropdown">
+		<img src="/static/img/admin-tiny.png" class="img-circle md-whiteframe-z2 ">
+		{{user.username}}				
+		<span class="caret"></span>
+	</md-button>
+	<ul class="dropdown-menu dropdown-profilemenu" aria-labelledby="profileDropdown"
+		 ng-controller="navbarMenuCtrl">
+
+		<li>
+			<a href="javascript:void(0)" ng-click="logout()">
+				<md-icon>power_settings_new</md-icon>
+				Logout
+			</a>
+		</li>
+	</ul>
+</div>
+
+{% endblock %}
+
+{% block site_toolbar_content %}
+<div ng-controller="navbarMenuCtrl" layout="row">
+		<md-button class="md-fab md-mini md-primary" ng-click="userProfile.updatePatientProfile()"
+			ng-if="fullUrl()=='/patient/profile'">
+			<md-icon style="color:white;">save</md-icon>
+			<md-tooltip> 
+				Save Profile
+			</md-tooltip>
+		</md-button>
+		<md-button class="md-fab md-mini" ng-href="#/patient/related-persons/create"
+			ng-if="fullUrl()=='/patient/related-persons'">
+			<md-icon style="color:white;">add</md-icon>
+			<md-tooltip> 
+				Add New Person	
+			</md-tooltip>
+		</md-button>
+</div>
+{{block.super}}
+{% endblock %}
+
+{% block sidenav_content %}
+<div ng-controller="urlCtrl">
+	<md-button ng-href="#/admin/seo" layout-fill class="md-primary md-raised md-spec first"
+		ng-class="{'active': fullUrl()=='/admin/seo'}">
+		<md-icon style="color:white;">dashboard</md-icon>
+		SEO
+	</md-button>
+
+
+	<md-button ng-href="#/admin/coordinators" layout-fill class="md-primary md-raised md-spec"
+		ng-class="{'active': fullUrl()=='/admin/coordinators'}">
+		<md-icon style="color:white;">group</md-icon>
+		Coordinators
+	</md-button>
+
+	<md-button ng-href="#/admin/experts" layout-fill class="md-primary md-raised md-spec"
+		ng-class="{'active': fullUrl()=='/admin/experts'}">
+		<i class="fa fa-medkit" style="height:24px; width:24px;font-size: 1.6em;"></i>
+		Experts
+	</md-button>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

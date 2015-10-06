@@ -1,0 +1,265 @@
+@import "variables.less";
+@import "avesome-font-variables.less";
+
+.tab-focus() {
+  // Default
+  outline: thin dotted;
+  // WebKit
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
+.transition-transform(@transition) {
+  -webkit-transition: -webkit-transform @transition;
+     -moz-transition: -moz-transform @transition;
+       -o-transition: -o-transform @transition;
+          transition: transform @transition;
+}
+
+
+.scale(@ratio) {
+  -webkit-transform: scale(@ratio);
+      -ms-transform: scale(@ratio); // IE9 only
+       -o-transform: scale(@ratio);
+          transform: scale(@ratio);
+}
+.scale(@ratioX; @ratioY) {
+  -webkit-transform: scale(@ratioX, @ratioY);
+      -ms-transform: scale(@ratioX, @ratioY); // IE9 only
+       -o-transform: scale(@ratioX, @ratioY);
+          transform: scale(@ratioX, @ratioY);
+}
+//
+// Checkboxes
+// --------------------------------------------------
+
+@font-family-icon: 'FontAwesome';
+
+.checkbox-variant(@parent, @color) {
+  .@{parent} input[type="checkbox"]:checked + label,
+  .@{parent} input[type="radio"]:checked + label {
+    &::before {
+      background-color: @color;
+      border-color: @color;
+    }
+    &::after {
+      color: #fff;
+    }
+  }
+}
+
+
+.checkbox{
+  @bg_color: white;
+  @fg_color: #69ADA9;
+  padding-left: 20px;
+
+  label{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 5px;
+	padding-top:1px;
+
+    &::before{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      left: 0;
+	  top:2px;
+      margin-left: -20px;
+      border: 1px solid @bg_color;
+      border-radius: 3px;
+      background-color: @bg_color;
+      .transition(~"border 0.15s ease-in-out, color 0.15s ease-in-out");
+    }
+
+    &::after{
+      display: inline-block;
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      left: 5px;
+      top: 7px;
+      margin-left: -20px;
+      padding-left: 3px;
+      padding-top: 1px;
+      font-size: 11px;
+      color: @input-color;
+	  //border: 1px solid @fg_color;
+	  border-radius: 50%;
+	  background-color: @fg_color;
+	  
+	  
+    }
+
+
+  }
+
+  input[type="checkbox"],
+  input[type="radio"]{
+    opacity: 0;
+    z-index: 1;
+
+    &:focus + label::before{
+      .tab-focus();
+    }
+
+    &:checked + label::after{
+      font-family: @font-family-icon;
+      content: @fa-var-check;
+    }
+
+    &:disabled + label{
+      opacity: 0.65;
+
+      &::before{
+        background-color: @input-bg-disabled;
+        cursor: not-allowed;
+      }
+    }
+
+  }
+
+  &.checkbox-circle label::before{
+    border-radius: 50%;
+  }
+
+  &.checkbox-inline{
+    margin-top: 0;
+  }
+}
+
+.checkbox-transparent{
+	label{
+
+	&::before{
+		background: transparent;
+	}
+	}
+}
+.checkbox-variant(checkbox-primary, @brand-primary);
+.checkbox-variant(checkbox-danger, @brand-danger);
+.checkbox-variant(checkbox-info, @brand-info);
+.checkbox-variant(checkbox-warning, @brand-warning);
+.checkbox-variant(checkbox-success, @brand-success);
+
+//
+// Radios
+// --------------------------------------------------
+
+.radio-variant(@parent, @color) {
+  .@{parent} input[type="radio"]{
+    & + label{
+      &::after{
+        background-color: @color;
+      }
+    }
+    &:checked + label{
+      &::before {
+        border-color: @color;
+      }
+      &::after{
+        background-color: @color;
+      }
+    }
+  }
+}
+
+.radio{
+  padding-left: 20px;
+
+  label{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 5px;
+
+    &::before{
+      content: "";
+      display: inline-block;
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      left: 0;
+      margin-left: -20px;
+      border: 1px solid @input-border;
+      border-radius: 50%;
+      background-color: #fff;
+      .transition(border 0.15s ease-in-out);
+    }
+
+    &::after{
+      display: inline-block;
+      position: absolute;
+      content: " ";
+      width: 11px;
+      height: 11px;
+      left: 3px;
+      top: 3px;
+      margin-left: -20px;
+      border-radius: 50%;
+      background-color: @input-color;
+      .scale(0, 0);
+
+      .transition-transform(.1s cubic-bezier(.8,-0.33,.2,1.33));
+      //curve - http://cubic-bezier.com/#.8,-0.33,.2,1.33
+    }
+  }
+
+  input[type="radio"]{
+    opacity: 0;
+    z-index: 1;
+
+    &:focus + label::before{
+      .tab-focus();
+    }
+
+    &:checked + label::after{
+      .scale(1, 1);
+    }
+
+    &:disabled + label{
+      opacity: 0.65;
+
+      &::before{
+        cursor: not-allowed;
+      }
+    }
+
+  }
+
+  &.radio-inline{
+    margin-top: 0;
+  }
+}
+
+.radio-variant(radio-primary, @brand-primary);
+.radio-variant(radio-danger, @brand-danger);
+.radio-variant(radio-info, @brand-info);
+.radio-variant(radio-warning, @brand-warning);
+.radio-variant(radio-success, @brand-success);
+
+input[type="checkbox"],
+input[type="radio"] {
+  &.styled:checked + label:after {
+    font-family: 'FontAwesome';
+    content: "\f00c";
+  }
+  & .styled:checked + label {
+    &::before {
+      color: #fff;
+    }
+    &::after {
+      color: #fff;
+    }
+  }
+}

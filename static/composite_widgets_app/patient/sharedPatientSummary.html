@@ -1,0 +1,14 @@
+	<div layout="row"> 
+		<div class="name">
+			<span ng-if="patient.patient.gender=='female'"><i class="fa fa-venus"></i></span>
+			<span ng-if="patient.patient.gender=='male'"><i class="fa fa-mars"></i></span>
+			<span ng-if="patient.patient.gender=='other'"><i class="fa fa-fa-transgender-alt"></i></span>
+			<span ng-if="patient.patient.gender=='unknown'"><i class="fa fa-fa-genderless"></i></span>				
+			<span>{{patient.patient.name[0].prefix[0]}} {{patient.patient.name[0].given[0]}} {{patient.patient.name[0].family[0]}}{{patient.patient.name[0].suffix[0]}} </span>
+		</div>
+		<div flex></div>
+		<p ng-if="patient.patient.birthDate">Birthday: {{patient.patient.birthDate | date: 'd/ MMM /yyyy'}}  </p>
+	</div>
+	<p ng-if="additionalText"> 
+		{{additionalText}}
+	</p>

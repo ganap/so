@@ -1,0 +1,41 @@
+<md-card layout-padding class="providerPatient nomargin" flex="50">
+
+<div ng-show="!editMode"> 
+	<b>
+		<span ng-repeat="coding in ngModel.code.coding">{{coding.display}} </span>
+	</b>
+	<p ng-show="ngModel.onsetDate"><b>Date:</b> {{ngModel.onsetDate | date: 'd/ MMM /yyyy'}}</p>
+	<p ng-if="ngModel.status"><b>Status:</b> {{const.getKeyByVal('CONDITION_CLINICAL_STATUS_TYPES', ngModel.clinicalStatus)}}</p>
+</div>
+<div ng-if="editMode" layout="row"> 
+	<div layout="column" layout-fill> 
+		<fd-coding ng-repeat="coding_c in ngModel.code.coding"
+			ng-model="coding_c" edit-mode="true"> 
+		</fd-coding>
+		<md-input-container> 
+			<label flex-order="0"> Status </label>
+			<const-select ng-model="ngModel.clinicalStatus" flex-order="1"
+				model-type="CONDITION_CLINICAL_STATUS_TYPES"> 
+			</const-select>
+		</md-input-container>
+	</div>
+	<div  flex></div>
+	<div layout="column">
+		<b> Date: </b>
+		<fd-date ng-model="ngModel.onsetDate" ng-if="ngModel.onsetDate"></fd-date>
+	</div>
+</div>
+
+		<!--
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-primary nomargin-top-bottom" ng-click="editMode=true"
+			ng-show="!editMode">
+			Edit	
+		</md-button>	
+		<md-button class="md-primary nomargin-top-bottom" ng-click="editMode=false"
+			ng-show="editMode">
+			Hide Edit Mode	
+		</md-button>	
+	</div>
+	-->
+</md-card>

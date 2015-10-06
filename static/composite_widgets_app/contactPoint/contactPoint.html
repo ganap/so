@@ -1,0 +1,43 @@
+
+<md-card layout-padding>
+	<b ng-if="!showEdit">{{label}}</b>
+	<div ng-if="!showEdit"> 
+		<cw-contact-point-view contact="contact"></cw-contact-point-view>
+	</div>
+
+	<md-card-content ng-if="showEdit">
+
+		<form name="form_cp"  accept-charset="utf-8" class="form-horizontal" ng-show="showEdit"
+			layout="column"> 
+
+				<md-input-container>
+					<label flex-order="1">Type</label>
+					<const-select ng-model="contact.system" model-type="CONTACT_POINT_SYSTEM_TYPES"
+						flex-order="2"> 
+					</const-select>
+				</md-input-container>
+
+				<md-input-container>
+					<label flex-order="1">{{valuePlaceholder}} (required)</label>
+					<input type="text" ng-model="contact.value" 
+								name="cp_value" required>
+				</md-input-container>
+
+				<md-input-container>
+					<label flex-order="1">Назначение</label>
+					<const-select ng-model="contact.use" model-type="CONTACT_POINT_USE_TYPES"
+						flex-order="2"> 
+					</const-select>
+				</md-input-container>
+
+				<cw-period period="contact.period" label="The period of time when the contact point has been / is used">
+				</cw-period>
+
+		</form>
+	</md-card-content>
+
+	<div ng-include="'/static/composite_widgets_app/sharedEditDeleteBts+HideEditMode+Cancel.html'"></div>
+
+</md-card>
+
+

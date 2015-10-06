@@ -1,0 +1,125 @@
+<div layout="column" layout-padding> 
+	
+	<md-card ng-show="tab=='diagnosis'" layout-padding> 
+		<h6> Request second opinion </h6>
+		<md-input-container> 
+			<label> Your previous diagnosis </label>
+			<textarea style="resize:vertical; min-height:4em;"
+				ng-model="request_info.previous"></textarea>
+		</md-input-container>
+		<div class="md-actions" layout="row" layout-align="end center">
+			<md-button class="md-primary nomargin-top-bottom" ng-click="tab='what_included'"
+				ng-disabled="!request_info.previous">
+				NEXT	
+			</md-button>
+		</div>
+	</md-card>
+
+
+	<md-card ng-show="tab=='what_included'" layout-padding> 
+		<h6 style="padding-left:1em;"> What is included in the second opinion consultation? </h6>
+		<p> 
+		<b> A board-certified staff physician who specializes in your condition will review all of your information and author a comprehensive second opinion report. </b>
+		In some cases, the physician will consult with an expert panel regarding your
+		case prior to completing the second opinion.
+		</p>
+		<p> The report will include: </p>
+		<ul> 
+			<li> 
+			A review of the diagnosis (and an updated diagnosis, if applicable)
+			</li>
+			<li> 
+			Answers to all of your submitted questions
+			</li>
+			<li> 
+			A review of treatment options and alternatives
+			</li>
+			<li> 
+			Information regarding clinical trials (if available)
+			</li>
+		</ul>
+		<p> 
+		<b> If your diagnosis involves a pathology reading, a Hygeiais pathologist who specializes in your condition will review the submitted slides. </b>
+		These results will be included in your second opinion report.
+		</p>
+		<p> 
+		<b> We understand that you may have more questions after reviewing your
+			second opinion report. That's why we give you the option to submit three
+			questions in response. </b>
+		Your questions will be answered and posted as an
+		addendum to your report within your secure Hygeiais account. If you further need to
+		schedule an teleconsult, the Hygeiais team will set that up for you for an additional
+		teleconsult fee.
+		</p>		
+		<div class="md-actions" layout="row" layout-align="space-between center">
+			<md-button class="md-primary nomargin-top-bottom" ng-click="tab='diagnosis'">
+				Back	
+			</md-button>
+		
+			<md-button class="md-primary nomargin-top-bottom" ng-click="tab='questions_and_docs'">
+				NEXT	
+			</md-button>
+		</div>		
+	</md-card>
+
+
+	<md-card ng-show="tab=='questions_and_docs'" layout-padding> 
+		<h6 style="padding-left:1em;"> Your questions to expert </h6>
+		<md-input-container> 
+			<label> Your first question (if you have one) </label>
+			<textarea ng-model="request_info.questions[0]"
+				style="resize:vertical; min-height:3em;"></textarea>
+		</md-input-container>
+		<md-input-container> 
+			<label> Your second question (if you have one) </label>
+			<textarea ng-model="request_info.questions[1]"
+				style="resize:vertical; min-height:3em;"></textarea>
+		</md-input-container>
+		<md-input-container> 
+			<label> Your third question (if you have one) </label>
+			<textarea ng-model="request_info.questions[2]"
+				style="resize:vertical; min-height:3em;"></textarea>
+		</md-input-container>
+		<cw-emr-management user-pk="userPk"> 
+		</cw-emr-management>
+		
+
+		<div class="md-actions" layout="row" layout-align="space-between center">
+			<md-button class="md-primary nomargin-top-bottom" ng-click="tab='what_included'">
+				Back	
+			</md-button>
+		
+			<md-button class="md-primary nomargin-top-bottom" ng-click="saveAndPay()">
+				NEXT	
+			</md-button>
+		</div>	
+	</md-card>
+
+	<md-card ng-show="tab=='save' && !error && loading"> 
+		<br>
+		<br>
+		<spinner-loader ng-show="true" label="Please wait...">  </spinner-loader>
+		<br>
+	</md-card>
+
+	<md-card ng-show="tab=='save' && error && !loading" layout-padding> 
+		<br>
+		<br>
+		<h6 class="text-danger center"> {{error}} </h6>
+		<div class="md-actions" layout="row" layout-align="end center">
+			<md-button class="md-primary nomargin-top-bottom" ng-click="saveAndPay()">
+				Retry	
+			</md-button>
+		</div>	
+	</md-card>
+
+	<md-card ng-show="tab=='save' && !error && !loading" layout-padding> 
+		<h6 style="padding-left:1em;"> Last step </h6>
+		<p style="text-indent:1.1em;"> Due to nationwide insurance regulations regarding second opinions, the Hygeais program is not covered by insurance or Medicare. We accept payment by most major credit cards or certified U.S. bank check or money order.  </p>
+		<div class="center"> 
+			<so-paypal-button></so-paypal-button>
+		</div>
+	</md-card>
+
+
+</div>

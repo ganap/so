@@ -1,0 +1,22 @@
+<md-card layout-padding> 
+	<b> {{person.name.prefix[0]}} {{person.name.given[0]}} {{person.name.family[0]}} {{person.name.suffix[0]}} {{contact_line}} </b>
+	<p ng-if="person.period.start || person.period.end">
+		Period: 
+		<cw-period-view period="person.period"></cw-period-view>
+	</p>
+	<div>
+		<div ng-repeat="l in person.relationship"
+			class="label label-info" style="margin-right:1em; margin-bottom:0.3em;"> 
+			{{const.getKeyByVal('PATIENT_CONTACT_RELATIONSHIP_TYPES',l)}}
+		</div>
+	</div>
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-primary nomargin-top-bottom" ng-href="{{url}}">
+			EDIT
+		</md-button>	
+		<md-button class="nomargin-top-bottom" ng-click="onDelete(person)">
+			Delete
+		</md-button>
+	</div>
+</md-card>
+

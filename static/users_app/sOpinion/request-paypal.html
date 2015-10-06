@@ -1,0 +1,22 @@
+<md-card layout="column" layout-padding ng-repeat="so in so_list" ng-if="have_payment"> 
+	<b> Summary: </b>
+	<ul> 
+		<li ng-if="request_info.previous"> 
+		{{request_info.previous}}
+		</li>
+		<li ng-repeat="question in questions"> 
+		{{question}}
+		</li>
+	</ul>
+
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-primary" ng-click="requestSO(so.pk)">
+			Request SO
+		</md-button>
+	</div>
+</md-card>
+<div ng-if="loading"> 
+	<br>
+	<br>
+	<spinner-loader label="Please wait..." ng-show="true"></spinner-loader>
+</div>

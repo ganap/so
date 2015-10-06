@@ -1,0 +1,15 @@
+<div layout="row"> 
+	<div layout="column"> 
+		<img ng-src="/media_files/avatars/{{expert.pk}}-search.jpg" style="min-width:200px;">	
+	</div>
+	<div layout="column" style="padding-left:8px;">
+		<b>{{expert.expert.name.given[0]}} {{expert.expert.name.family[0]}}</b>
+		<p ng-if="expert.expert.speciality"> <b style="padding-right:0.2em;"> Speciality: </b> {{expert.expert.speciality}} </p>
+		<p ng-if="expert.expert.degree"> <b style="padding-right:0.2em;"> Degree: </b> {{expert.expert.degree | cut:true:150}} </p>
+		<p ng-if="expert.expert.clinical_expertise"> <b style="padding-right:0.2em;"> Clinical expertise: </b> {{expert.expert.clinical_expertise}} </p>
+		<a ng-if="expert.expert.link_to_drupal"
+			href="expert.expert.link_to_drupal"> 
+			{{expert.expert.link_to_drupal}}	
+		</a>
+	</div>
+</div>

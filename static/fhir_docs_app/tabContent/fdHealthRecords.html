@@ -1,0 +1,74 @@
+<div layout="row" layout-align="start center" ng-if="location!='main' && !currentAttachment.ext"> 
+	<md-button class="md-icon-button" ng-click="goBack()"> 
+		<md-icon>arrow_back</md-icon>
+	</md-button>
+	<h6 class="nomargin" style="margin-top: 4px !important;">{{location | varToText}}</h6>
+</div>
+
+<div ng-repeat="(key, bundle) in patient.fhir_doc"ng-if="location=='main'"> 
+	<fd-condition-summary bundle="bundle" ng-if="key=='Condition'">
+	</fd-condition-summary>
+	<fd-observation-summary bundle="bundle" ng-if="key=='Observation'">
+	</fd-observation-summary>
+	<fd-imaging-study-summary bundle="bundle" ng-if="key=='ImagingStudy' && bundle.entry">
+	</fd-imaging-study-summary>	
+</div>
+<br ng-if="location=='main'">
+
+<div ng-if="!currentAttachment.ext">
+
+	<div layout="row" layout-sm="column"  ng-repeat="condition in patient.fhir_doc.Condition.entry" 
+			ng-if="location=='Condition'"
+			layout-padding class="nopadding">
+		<fd-condition ng-model="patient.fhir_doc.Condition.entry[$index*2].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.Condition.entry[$index*2].content">
+		</fd-condition>		
+		<fd-condition ng-model="patient.fhir_doc.Condition.entry[$index*2+1].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.Condition.entry[$index*2+1].content">
+		</fd-condition>	
+	</div>
+
+	<div layout="row" layout-sm="column"  ng-repeat="obj in patient.fhir_doc.Observation.entry" 
+			ng-if="location=='Observation'"
+			layout-padding class="nopadding">
+		<fd-observation ng-model="patient.fhir_doc.Observation.entry[$index*2].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.Observations.entry[$index*2].content">
+		</fd-observation>		
+		<fd-observation ng-model="patient.fhir_doc.Observation.entry[$index*2+1].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.Observations.entry[$index*2+1].content">
+		</fd-observation>	
+	</div>
+		
+	<div layout="row" layout-sm="column"  ng-repeat="obj in patient.fhir_doc.ImagingStudy.entry" 
+			ng-if="location=='ImagingStudy'"
+			layout-padding class="nopadding">
+		<fd-imaging-study ng-model="patient.fhir_doc.ImagingStudy.entry[$index*2].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.ImagingStudy.entry[$index*2].content"
+			current-attachment="currentAttachment">
+		</fd-imaging-study>		
+		<fd-imaging-study ng-model="patient.fhir_doc.ImagingStudy.entry[$index*2+1].content" flex="50" flex-sm="100"
+			ng-if="patient.fhir_doc.ImagingStudy.entry[$index*2+1].content"
+			current-attachment="currentAttachment">
+		</fd-imaging-study>	
+	</div>
+	<br>
+</div>	
+
+
+<div ng-if="currentAttachment.ext" layout="column">
+	<div layout="row"  layout-align="start center"> 
+		<md-button class="md-icon-button" ng-click="currentAttachment.ext=''"> 
+			<md-icon>arrow_back</md-icon>
+		</md-button>
+		<h6 class="nomargin" style="margin-top: 4px !important;">Back to {{location | varToText}} details</h6>
+		<ul class="list-inline nomargin"> 
+			<li><cw-dicom-invert-btn></cw-dicom-invert-btn></li>
+			<li><cw-dicom-interpolation-btn></cw-dicom-interpolation-btn>	</li>
+			<li><cw-dicom-info-btn></cw-dicom-info-btn></li>
+		</ul>
+	</div>
+
+	<cw-attachment-view attachment="currentAttachment"
+		ng-if="currentAttachment.ext"> 
+	</cw-attachment-view>
+</div>

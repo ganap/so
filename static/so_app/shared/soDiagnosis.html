@@ -1,0 +1,70 @@
+
+<md-card layout="column" ng-if="diagnosis.owner && !viewMode" layout-padding> 
+	<h6 class="text-danger" ng-if="error">{{error}}</h6>
+
+	<p ng-if="diagnosis.request_info.previous"> 
+	<b>Previous diagnosis: </b> {{diagnosis.request_info.previous}}
+	</p>
+	<md-input-container> 
+		<label> Diagnosis / Reason for Consultation </label>
+		<textarea ng-model="diagnosis.diagnosis" style="resize:vertical; min-height:3em;"
+			ng-disabled="diagnosis.is_closed"></textarea>
+	</md-input-container>
+	<md-input-container> 
+		<label>Diagnostic Summary / Treatment Summary</label>
+		<textarea ng-model="diagnosis.summary" style="resize:vertical; min-height:3em;"
+			ng-disabled="diagnosis.is_closed"></textarea>
+	</md-input-container>
+	<md-input-container> 
+		<label>Second Opinion Recommendations</label>
+		<textarea ng-model="diagnosis.second_opinion" style="resize:vertical; min-height:3em;"
+			ng-disabled="diagnosis.is_closed"></textarea>
+	</md-input-container>
+
+	<div ng-if="diagnosis.request_info.questions"> 
+		<b>Answers on patients questions</b>
+		<md-input-container ng-repeat="question in diagnosis.request_info.questions"> 
+			<label>{{question}}</label>
+			<textarea ng-model="diagnosis.request_info.answers[$index]" 
+					style="resize:vertical; min-height:3em;"
+					ng-disabled="diagnosis.is_closed"></textarea>
+		</md-input-container>
+	</div>
+
+	<div class="md-actions" layout="row" layout-align="end center" ng-hide="diagnosis.is_closed">
+		<md-button class="md-primary nomargin-top-bottom" ng-click="requestAdditionalInfo()"> 
+			Request More Info from User	
+		</md-button>		
+		<md-button class="md-primary nomargin-top-bottom" ng-click="publishSO()"
+			ng-disabled="error || !diagnosis.second_opinion"> 
+			Publish Second Opinion	
+		</md-button>
+	</div>
+
+</md-card>
+
+
+
+<div ng-if="!diagnosis.owner && !published"> 
+	<br>
+	<h5 class="text-danger center">You can't provide second opinion to patient until you take the case</h5>
+	<br>
+</div>
+<div ng-if="published"> 
+	<br>
+	<h5 class="text-primary center">Thanks, your Second Opinion has been sent to the User</h5>
+	<br>
+</div>
+
+
+<md-card ng-if="diagnosis.owner && viewMode" layout-padding> 
+	<p ng-if="diagnosis.request_info.previous"> 
+		<b>Previous diagnosis: </b> {{diagnosis.request_info.previous}}
+	</p>
+	<p ng-if="diagnosis.request_info.questions">  <b> Questions: </b> </p>
+	<ul ng-if="diagnosis.request_info.questions"> 
+		<li ng-repeat="question in diagnosis.request_info.questions"> 
+		{{question}}
+		</li>
+	</ul>
+</md-card>

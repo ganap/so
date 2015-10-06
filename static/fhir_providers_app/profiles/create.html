@@ -1,0 +1,16 @@
+	<md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Main">
+        <md-content>
+			<div ng-include="'/static/shared_templates/profile_main.html'"></div>
+        </md-content>
+      </md-tab>
+      <md-tab label="EMRs">
+        <md-content>
+			<br>
+			<h6 ng-if="create_new" class="text-danger">
+				80. Загрузить файлы для пользователя нельзя. Сперва создайте его аккаунт.
+			</h6>
+			<br>
+        </md-content>
+      </md-tab>
+    </md-tabs>

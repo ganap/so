@@ -1,0 +1,103 @@
+<div layout="row" class="patient-profile-edit" layout-margin layout-sm="column"> 
+
+
+		<div flex> 
+			<h6 class="text-primary">Profile Photo</h6>
+				
+			<div layout="row">
+				<div flex>  </div>
+				<div class="center" flex="80"> 
+					<picture-picker image="profile.new_photo" default-url="{{profile.photo[0]}}"></picture-picker>
+				</div>
+				<div flex>  </div>
+			</div>
+
+			<h6 class="text-primary"> Date of birth </h6>
+			<div class="form-group">
+				<birthday-picker birthday-iso="profile.birthDate" min-age="1" max-age="100"
+					btn-class="form-control">
+				</birthday-picker>
+			</div>
+			<br>
+
+
+			<h6 class="text-primary"> Marital status</h6>
+			<div class="form-group">
+				<const-select ng-model="profile.maritalStatus" model-type="MARITAL_STATUS_TYPES"> 
+				</const-select>
+			</div>
+			<br>
+
+
+			<ul class="list-inline nomargin"> 
+				<li class="nopadding"> 
+					<h6 class="text-primary">Addresses</h6>
+				</li>
+				<li> 
+					<md-button class="md-fab md-mini nomargin md-success"
+						ng-click="profile.address.push({})">
+				        <md-icon>add</md-icon>
+						<md-tooltip ng-if="!profile.address.length">Add Address Info</md-tooltip>
+						<md-tooltip ng-if="profile.address.length">Add Another Address</md-tooltip>
+					</md-button>			
+				</li>
+			</ul>
+			<div ng-repeat="address in profile.address">
+				<cw-address address="address" label="Address #{{$index+1}}"
+					on-delete="deleteAddress($index)">
+				</cw-address>
+			</div>
+
+			<br>
+		</div>
+
+
+		<div flex> 
+			<ul class="list-inline nomargin"> 
+				<li class="nopadding"> 
+					<h6 class="text-primary">Names</h6>
+				</li>
+				<li> 
+					<md-button class="md-fab md-mini nomargin md-success"
+						ng-click="profile.name.push({})">
+				        <md-icon>add</md-icon>
+						<md-tooltip>Add Another Name</md-tooltip>
+					</md-button>			
+				</li>
+			</ul>
+			<div ng-repeat="name in profile.name"> 
+				<cw-human-name human="name" label="Name #1" 
+					hide-delete-btn="true"
+					ng-if="$index==0">
+				</cw-human-name>
+
+				<cw-human-name human="name" label="Name #{{$index+1}}" 
+					on-delete="deleteName($index)"
+					ng-if="$index>0">
+				</cw-human-name>
+
+			</div>
+			<br>
+
+			<ul class="list-inline nomargin"> 
+				<li class="nopadding"> 
+					<h6 class="text-primary">Contacts</h6>
+				</li>
+				<li> 
+					<md-button class="md-fab md-mini nomargin md-success"
+						ng-click="profile.telecom.push({})">
+				        <md-icon>add</md-icon>
+						<md-tooltip ng-if="!profile.telecom.length">Add My Contact</md-tooltip>
+						<md-tooltip ng-if="profile.telecom.length">Add Another Contact</md-tooltip>
+					</md-button>			
+				</li>
+			</ul>
+			<div ng-repeat="contact in profile.telecom">
+				<cw-contact-point contact="contact" label="Contact #{{$index+1}}"
+					on-delete="deleteContact($index)">
+				</cw-contact-point>
+			</div>
+			<br>
+		</div>
+
+</div>

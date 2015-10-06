@@ -1,0 +1,28 @@
+<div class="row"> 
+	<div class="col-sm-2 col-md-1 col-lg-1"> 
+		<cw-dicom-tool-btns> 
+		</cw-dicom-tool-btns>
+	</div>
+	<div class="col-xs-12 col-sm-11 col-md-11 col-lg-11"> 
+		<div oncontextmenu="return false"
+			class='disable-selection noIbar dicom-base-view-wrapper'
+			unselectable='on'
+			onselectstart='return false;'
+			onmousedown='return false;'>
+			<div dicom-base-view="{{dicomUrl}}"
+				style="height:90vh;">
+				<div class="center" style="position: absolute;left: 50%;z-index: 0;" ng-if="!loaded"> 
+					<br>
+					<br>
+					<br>
+					<div class="whirly-loader">
+						Please wait…
+					</div>
+					<br>
+					<br>
+					<h6 class="text-danger">Please Wait</h6>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

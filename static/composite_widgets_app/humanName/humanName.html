@@ -1,0 +1,54 @@
+<md-card layout-padding>
+	<b ng-if="!showEdit">{{label}}</b>
+	<p ng-if="!showEdit"> {{human.prefix[0]}} {{human.given[0]}} {{human.family[0]}} {{human.suffix[0]}} </p>
+	<md-card-content ng-if="showEdit">
+	<form name="form_hn"  accept-charset="utf-8" class="form-horizontal" ng-show="showEdit"
+		layout="column">
+
+			<md-input-container>
+				<label flex-order="1">First Name /given/ (required)</label>
+				<input type="text" ng-model="human.given[0]" name="hn_first_name" required>
+			</md-input-container>
+	
+			<md-input-container>
+				<label flex-order="1">Last Name /family/ (required)</label>
+				<input type="text" ng-model="human.family[0]" name="hn_last_name" required>
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">Prefix: Mr./ Miss / Mrs./ Etc…</label>
+				<input type="text" ng-model="human.prefix[0]" name="hn_prefix">
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">Suffix /academic, legal, professional degree/</label>
+				<input type="text" ng-model="human.suffix[0]" name="hn_suffix">
+			</md-input-container>
+
+
+			<md-input-container>
+				<label flex-order="1">Name Type</label>
+				<const-select ng-model="human.use" model-type="NAME_USE_TYPES"
+					flex-order="2"> 
+				</const-select>
+			</md-input-container>
+
+
+			<cw-period period="human.period" label="The period of time when the name was / is used">  </cw-period>
+
+	</form>
+	</md-card-content>
+
+
+	<div ng-include="'/static/composite_widgets_app/sharedEditDeleteBts+HideEditMode+Cancel.html'"></div>
+
+</md-card>
+
+
+<!--
+
+<line-edit-delete-btns show-edit="showEdit" on-delete="onDelete()" label="{{label}}" hide-delete-btn="hideDeleteBtn"> 
+</line-edit-delete-btns>
+
+
+-->

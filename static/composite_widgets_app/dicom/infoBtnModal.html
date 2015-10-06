@@ -1,0 +1,35 @@
+<md-dialog class="dicom-base-info-modal">
+<form>
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h3>Dicom file information</h3>
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="cancel()">
+			<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="max-width:800px;max-height:810px; ">
+		<md-tabs md-dynamic-height >
+			<md-tab id="tab1">
+				<md-tab-label>Basic</md-tab-label>
+				<md-tab-body>
+					<dicom-base-info-basic></dicom-base-info-basic>
+				</md-tab-body>
+			</md-tab>
+			<md-tab id="tab2">
+				<md-tab-label>Image & Equipment</md-tab-label>
+				<md-tab-body>
+					<dicom-base-info-image-equipment></dicom-base-info-image-equipment>
+				</md-tab-body>
+			</md-tab>
+		</md-tabs>
+	</md-dialog-content>
+	<div class="md-actions" layout="row">
+		<span flex></span>
+		<md-button ng-click="cancel()" >
+			Close
+		</md-button>
+	</div>
+</form>
+</md-dialog>

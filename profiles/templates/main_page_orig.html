@@ -1,0 +1,55 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+{% block angular_app %}
+<html lang="en" ng-app="App">
+{% endblock %}
+
+{% block css_js_load %}
+
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'main_page_app' %}
+
+{% endblock %}
+
+
+
+{% block sidenav %}
+{% endblock %}
+
+{% block site_toolbar %}
+		<md-toolbar class="md-whiteframe-z2" >
+			<div class="md-toolbar-tools">
+				<span>{{site_pref.title}}</span>
+				<!-- fill up the space between left and right area -->
+				<span flex></span>
+			</div>
+		</md-toolbar>
+{% endblock %}
+
+
+{% block content %}
+{% verbatim %}
+<div layout="row"> 
+<div flex>  </div>
+<md-tabs md-dynamic-height class="login-register-widgets">
+	<md-tab label="Login">
+		<md-content class="md-padding">
+			<login-widget redirect-url="'/'"></login-widget>
+		</md-content>
+	</md-tab>
+	<md-tab label="Register">
+		<md-content class="md-padding">
+			<register-user-widget></register-user-widget>
+		</md-content>
+	</md-tab>
+</md-tabs>
+</div>
+{% endverbatim %}
+
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

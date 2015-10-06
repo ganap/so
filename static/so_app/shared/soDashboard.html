@@ -1,0 +1,88 @@
+
+<md-tabs md-dynamic-height md-border-bottom>
+	<md-tab label="Open{{queue_count.opened}}">
+		<md-content>
+			<div ng-show="!pick_expert"> 
+				<md-checkbox ng-model="show_unasigned_only" 
+					ng-show="userProfile.user.is_moderator || userProfile.user.is_admin">
+					Show only unasigned cases
+		        </md-checkbox>
+				<so-patient-summary ng-repeat="so in queue.opened" so="so"
+					on-view-click="onViewClick(patient)" on-assign-click="assignTo(patient, so)"
+					ng-if="!show_unasigned_only" allow-get-case="userProfile.user.is_expert"
+					allow-refuse-case="userProfile.user.is_expert"> 
+				</so-patient-summary>
+				<so-patient-summary ng-repeat="so in queue.opened | filter: {assigned_to:0}" so="so"
+					on-view-click="onViewClick(patient)" on-assign-click="assignTo(patient, so)"
+					ng-if="show_unasigned_only" allow-get-case="userProfile.user.is_expert"
+					allow-refuse-case="userProfile.user.is_expert"> 
+				</so-patient-summary>
+			</div>
+			<div ng-if="pick_expert"> 
+				<md-card layout-padding class="providerPatient" layout="row" layout-align="start center">
+					<md-button class="md-icon-button" ng-click="goBack()"> 
+						<md-icon class="text-primary">arrow_back</md-icon>
+					</md-button>
+					<div ng-include="'/static/composite_widgets_app/patient/sharedPatientSummary.html'"></div>
+				</md-card>
+				<md-input-container> 
+					<label> Search for expert (type name, speciality, etc.) </label>
+					<input type="text" ng-model="searchExpert" >
+				</md-input-container>
+				<md-card ng-repeat="expert in expert_list | filter: searchExpert" layout-padding> 
+					<cw-expert-view-simple expert="expert"></cw-expert-view-simple>
+					<div class="md-actions" layout="row" layout-align="end center">
+						<md-button class="md-primary nomargin-top-bottom"
+							ng-click="assignPatientTo(expert)">
+							Assign
+						</md-button>
+						<md-button class="md-primary nomargin-top-bottom" 
+							ng-click="dialogsAndVideoIm.startChatWith(expert)">
+							Chat	
+						</md-button>				
+					</div>							
+				</md-card>
+			</div>
+			<div ng-show="!queue_count.opened"> 
+				<br>
+				<h6 class="text-primary	center"> There's nothing here </h6>
+			</div>
+		</md-content>
+	</md-tab>
+
+
+	<md-tab label="In Process{{queue_count.in_progress}}"> 
+		<so-patient-summary ng-repeat="so in sOpinion.queue.in_progress" so="so"
+			on-view-click="onViewClick(patient)" allow-refuse-case="userProfile.user.is_expert"> 
+		</so-patient-summary>
+		<div ng-show="!queue_count.in_progress"> 
+			<br>
+			<h6 class="text-primary	center"> There's nothing here </h6>
+		</div>
+	</md-tab>
+
+
+	<md-tab label="Processed{{queue_count.processed_}}"> 
+		<so-patient-summary ng-repeat="so in sOpinion.queue.processed_" so="so"
+			on-view-click="onViewClick(patient)"> 
+		</so-patient-summary>
+		<div ng-show="!queue_count.processed_"> 
+			<br>
+			<h6 class="text-primary	center"> There's nothing here </h6>
+		</div>		
+	</md-tab>
+
+
+
+
+	<md-tab label="Closed{{queue_count.closed}}"> 
+		<so-patient-summary ng-repeat="so in sOpinion.queue.closed" so="so"
+			on-view-click="onViewClick(patient)"> 
+		</so-patient-summary>
+		<div ng-show="!queue_count.closed"> 
+			<br>
+			<h6 class="text-primary	center"> There's nothing here </h6>
+		</div>	
+	</md-tab>
+</md-tabs>
+

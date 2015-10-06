@@ -1,0 +1,141 @@
+<div layout="column">
+
+	<error ng-model="error"></error>
+
+	<md-tabs md-dynamic-height md-border-bottom ng-show="!createProfile && !error">
+      <md-tab label="Profile">
+        <md-content>
+			<cw-patient-profile profile="patient.patient"></cw-patient-profile>
+			<cw-patient-profile-errors form="patient.patient.$form"></cw-patient-profile-errors>
+        </md-content>
+      </md-tab>
+	  <md-tab label="Medications / Treatments"> 
+		<md-content layout-padding> 
+			<fd-medications-and-treatments patient="patient" ng-if="!create_new">  </fd-medications-and-treatments>
+			<div  ng-if="create_new" > 
+				<br>
+				<br>
+				<h6 class="text-danger center" >
+					You are not able to view user's health data. Please create an account first
+				</h6>
+				<br>
+				<br>
+			</div>			
+		</md-content>
+	  </md-tab>	  
+	  <md-tab label="Health Record"> 
+		<md-content layout-padding> 
+			<!--
+			<md-input-container ng-if="create_fhir"> 
+				<label>Fhir data from https://fhir-open-api.smarthealthit.org</label>
+				<md-select ng-model="fhir_tab"> 
+					<md-option ng-repeat="(key, obj) in patient.fhir_doc | orderBy: key" value="{{key}}">
+						{{key | varToText}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<div json-human="patient.fhir_doc.Observations"></div>
+			-->
+			<fd-health-records patient="patient" ng-if="!create_new">  </fd-health-records>
+			<div  ng-if="create_new" > 
+				<br>
+				<br>
+				<h6 class="text-danger center" >
+					You are not able to view user's health data. Please create an account first
+				</h6>
+				<br>
+				<br>
+			</div>			
+		</md-content>
+	  </md-tab>
+      <md-tab label="Documents">
+        <md-content >
+			<div  ng-if="create_new || create_fhir" > 
+				<br>
+				<br>
+				<h6 class="text-danger center" >
+					You are not able to upload user's files. Please create an account first
+				</h6>
+				<br>
+				<br>
+			</div>
+			<cw-emr-management user-pk="patient.pk" hide-delete-btn="true"
+				ng-show="patient.pk"></cw-emr-management>
+        </md-content>
+      </md-tab>
+      <md-tab label="Device data">
+        <md-content >
+		</md-content>
+	  </md-tab>
+    </md-tabs>
+	<div ng-show="createProfile"> 
+		<form name="form"  accept-charset="utf-8" class="form-horizontal" ng-hide="createProfileProgress"> 
+			<md-card layout="column" flex="50" flex-sm="100" layout-padding
+				style="margin-left:5px;">
+				<md-input-container layout="column">
+					<label flex-order="1">Username</label>
+					<input required username-available name="username" ng-model="patient.username" type="text">
+					<div ng-messages="form.username.$error"  class="messages" >
+						<div ng-message="required">[required]</div>
+						<div ng-message="usernameExists">[already exists]</div>
+					</div>				
+				</md-input-container>
+
+				<md-input-container layout="column">
+					<label flex-order="1">Sex</label>
+					<const-select ng-model="patient.patient.gender" model-type="GENDER_TYPES"
+						flex-order="2"> 
+					</const-select>
+				</md-input-container>
+
+				<md-input-container layout="column">
+					<label flex-order="1">Email</label>
+					<input required email-available  name="email" ng-model="patient.email" type="email">
+					<div ng-messages="form.email.$error" class="messages" >
+						<div ng-message="required">[required]</div>
+						<div ng-message="email">[invalid email]</div>
+						<div ng-message="emailExists">[already exists]</div>
+					</div>				
+				</md-input-container>
+
+				<md-input-container>
+					<label>Password</label>
+					<input required name="password" ng-model="patient.password" type="password">
+					<div ng-messages="form.password.$error" class="messages" >
+						<div ng-message="required">[required]</div>
+					</div>
+				</md-input-container>
+
+				<bs-checkbox ng-model="patient.send_email" label="Send email with password and username to user"
+					ng-if="create_new || create_fhir"></bs-checkbox>
+			</md-card>	
+		</form>
+		<div ng-if="createProfileProgress && !error">
+			<br>
+			<br>
+			<spinner-loader ng-show="true" label="Creating profile. Please wait..."></spinner-loader>
+		</div>
+		<div ng-if="error" class="center"> 
+			<md-button class="md-raised md-primary" ng-click="tryAgain()"> 
+				Try again
+			</md-button>
+		</div>
+	</div>
+</div>
+
+
+
+			<md-button class="md-fab md-btn-bottom-right-fixed" ng-click="createProfile=true"
+				ng-disabled="!patient.patient.$form.valid"  ng-show="(create_new || create_fhir) && !createProfile">
+				<md-icon style="color:white;">person_add</md-icon>
+			</md-button>			
+			
+			<md-button class="md-fab md-btn-bottom-right-fixed" ng-click="create()"
+				ng-disabled="form.$invalid || createProfileProgress"  ng-show="createProfile">
+				<md-icon style="color:white;">keyboard_arrow_right</md-icon>
+			</md-button>
+
+			<md-button class="md-fab md-btn-bottom-right-fixed" ng-click="update()"
+				ng-disabled="!patient.patient.$form.valid"  ng-show="!create_new && !create_fhir">
+				<md-icon style="color:white;">save</md-icon>
+			</md-button>	

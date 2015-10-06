@@ -1,0 +1,35 @@
+<div class="col-lg-12"> 
+	<h6 class="text-primary" style="margin-top:1.2em;"> SEO </h6>
+	<div class="alert alert-danger" role="alert" ng-show="error">
+		{{error}}
+	</div>
+
+	<form name="form" accept-charset="utf-8" class="form-horizontal" layout="column">
+
+			<md-input-container>
+				<label flex-order="1">Site title</label>
+				<input type="text" name="title" class="form-control" ng-model="site_pref.title" required>
+				<div ng-messages="form.title.$error"  >
+					<div ng-message="required">[required]</div>
+				</div>				
+			</md-input-container>		
+
+			<md-input-container>
+				<label flex-order="1">Site description</label>
+				<input type="text" name="description" class="form-control" ng-model="site_pref.description">
+			</md-input-container>	
+
+			<md-input-container>
+				<label flex-order="1">Site keywords (comma separated)</label>
+				<input type="text" name="keywords" class="form-control" ng-model="site_pref.keywords">
+			</md-input-container>	
+
+			<div class="md-actions" layout="row" layout-align="end center">
+				<p ng-show="disableForm"> Please wait... </p>
+				<md-button  class="md-raised md-primary" ng-click="save()" ng-disabled="form.$invalid || disableForm"> 
+					Save
+				</md-button>
+			</div>
+	</form>
+	
+</div>

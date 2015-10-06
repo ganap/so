@@ -1,0 +1,31 @@
+<div layout="row" ng-if="!editMode"> 
+	{{ngModel.repeat.frequency}} times / <span ng-show="ngModel.repeat.duration>1"> in {{ngModel.repeat.duration}}  </span> {{const.getKeyByVal('TIMING_UNITS_TYPES', ngModel.repeat.units)}}
+</div>
+
+<div layout="column" ng-if="editMode"> 
+	<div layout="row" layout-padding layout-align="start center"> 
+		<b style="margin-right:0.5em;" class="text-primary"> How often? </b>
+		<input type="number" ng-model="ngModel.repeat.frequency" min="0" 
+			style="max-width:3em;margin-right:0.5em;" class="center"
+			ng-disabled="ngDisabled">
+		<b style="margin-right:0.5em; min-width:2.3em;" class="text-primary"> Per </b>
+		<input type="number" ng-model="ngModel.repeat.duration" min="1" 
+			style="max-width:3em; margin-right:0.5em;" class="center"
+			ng-disabled="ngDisabled">
+		<const-select ng-model="ngModel.repeat.units"
+			model-type="TIMING_UNITS_TYPES" ng-disabled="ngDisabled"> 
+		</const-select>
+	</div>
+	<div layout="row"> 
+		<div layout="column" layout-padding> 
+			<b class="text-primary"> Date started </b>
+			<fd-date-button ng-model="ngModel.event[0].start" flex-order="2"
+				ng-disabled="ngDisabled"></fd-date-button>
+		</div>
+		<div layout="column" layout-padding> 
+			<b class="text-primary"> Date ended </b>
+			<fd-date-button ng-model="ngModel.event[0].end" flex-order="2"
+				ng-disabled="ngDisabled"></fd-date-button>
+		</div>
+	</div>
+</div>

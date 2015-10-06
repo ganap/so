@@ -1,0 +1,14 @@
+<div class="checkbox checkbox-default" ng-show="!reverse">
+	<input type="checkbox" id="checkbox-{{name}}" name="{{name}}" ng-model="ngModel"
+		   ng-disabled="ngDisabled"> 
+	<label for="checkbox-{{name}}">
+		{{label}}	
+	</label>
+</div>		
+<div class="checkbox checkbox-default" ng-show="reverse">
+	<input type="checkbox" id="checkbox-{{name}}" name="{{name}}" ng-model="ngModel"
+		   ng-disabled="ngDisabled" ng-false-value="true" ng-true-value="false"> 
+	<label for="checkbox-{{name}}">
+		{{label}}	
+	</label>
+</div>		

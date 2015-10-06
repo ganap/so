@@ -1,0 +1,77 @@
+<div ng-show="!form.valid" layout-padding> 
+	<small class="span-error">You will not be able to add a person until all mandatory fields are populated. </small>
+	<ul style="font-size:80%;"> 
+		<li class="span-error" ng-show="form.error.address">You have added a person's adress, but did not fil in a fieds. Either click "Cancel" in the adress block, or fill in the mandatory fields.</li>
+		<li class="span-error" ng-show="form.error.name"> You have not filled all mandatory fields in the block His/Her name</li>
+		<li class="span-error" ng-show="form.error.telecom.length">The contact data blocks # <span ng-repeat="i in form.error.telecom"><span ng-show="$index>0">,</span> {{i+1}}</span> are not filled in with the values of contacts. Remove the blocks or fill them in. </li>
+		<li class="span-error" ng-show="form.error.relationship">You did not specify the relationship type. Please select at least one value on the top, and click the "Add" button.</li>
+	</ul>
+</div>
+
+
+<div layout="row" layout-sm="column">
+	<div flex="50" flex-sm="100" layout-padding>
+		<md-card layout-padding>
+			<b>Relationship type(required)</b>	
+			<list-objs-management list-objs='person.relationship'
+				help-text='To add more than one relationship type, select the relationship type from the drop down box and click add.'
+				default-obj="emergency"
+				const-type="PATIENT_CONTACT_RELATIONSHIP_TYPES"> 
+			</list-objs-management>
+		</md-card>
+		
+		<md-card layout-padding> 
+			<b> His/Her Sex </b>
+			<const-select ng-model="person.gender" model-type="GENDER_TYPES"> 
+			</const-select>
+		</md-card>
+
+		<cw-human-name human="person.name"
+				label="His/Her Name"
+				hide-delete-btn="true"
+				hide-bottom-btns="true"> 
+		</cw-human-name>
+	</div>
+	<div flex="50" flex-sm="100" layout-padding>
+		<button class="btn btn-success btn-block btn-sm" ng-click="person.address={}" 
+			ng-show="!person.address" style="margin-top:15px;">
+			<span class="glyphicon glyphicon-plus"></span>
+			ADD ADDRESS INFO
+		</button>
+		<cw-address address="person.address" label="His/Her Address"
+				on-delete="deleteAddress()" ng-if="person.address">
+		</cw-address>	
+
+		<hr>
+	
+		<cw-contact-point contact="contact" label="His/Her Contact #{{$index+1}}"
+				ng-repeat="contact in person.telecom"
+				on-delete="deleteContact($index)">
+		</cw-contact-point>
+		<button class="btn btn-success btn-block btn-sm" ng-click="person.telecom.push({})">
+			<span class="glyphicon glyphicon-plus"></span>
+			ADD CONTACT INFO
+		</button>
+
+		<hr>
+
+		<cw-period period="person.period" label="The period of time during which this person coud be contacted">  
+		</cw-period>
+	</div>
+
+
+	<br>
+	<br>
+
+</div>
+
+
+<md-button class="md-fab md-btn-bottom-right-fixed" ng-click="onSave()" 
+	ng-disabled="!form.valid">
+	<md-icon style="color:white;">save</md-icon>
+	<md-tooltip> 
+		{{btnSaveLabel || 'SAVE PERSON'}}
+	</md-tooltip>
+</md-button>	
+
+

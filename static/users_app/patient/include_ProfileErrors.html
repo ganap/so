@@ -1,0 +1,9 @@
+
+<div ng-show="!form.valid" style="font-size:85%;"> 
+	<p class="span-error">You will not be able to save profile until all mandatory fields are populated. </p>
+	<ul > 
+		<li class="span-error" ng-show="form.error.telecom.length">The contact data blocks # <span ng-repeat="i in form.error.telecom"><span ng-show="$index>0">,</span> {{i+1}}</span> are not filled in with the values of contacts. Remove the blocks or fill them in. </li>
+		<li class="span-error" ng-show="form.error.address.length">The address data blocks # <span ng-repeat="i in form.error.address"><span ng-show="$index>0">,</span> {{i+1}}</span> are not filled in with the values of address. Remove the blocks or fill them in. </li>
+		<li class="span-error" ng-show="form.error.name.length">The name data blocks # <span ng-repeat="i in form.error.name"><span ng-show="$index>0">,</span> {{i+1}}</span> are not filled in with the values of name. Remove the blocks or fill them in. </li>
+	</ul>
+</div>

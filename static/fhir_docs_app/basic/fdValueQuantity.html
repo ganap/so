@@ -1,0 +1,10 @@
+<div ng-show="!editMode"> 
+	<fd-value-quantity-view ng-model="ngModel"></fd-value-quantity-view>
+</div>
+<div ng-show="editMode"> 
+	<a href="javascript:void(0)" ng-click="runEditDialog()"  style="padding-left:2px;">
+		<b>
+			<fd-value-quantity-view ng-model="ngModel"></fd-value-quantity-view>
+		</b>
+	</a>
+</div>

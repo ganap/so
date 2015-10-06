@@ -1,0 +1,12 @@
+<span ng-if="ngModel.type_=='r'"> 
+	{{ngModel.radiation.area_of_body || '-'}}
+</span>
+<span ng-if="ngModel.type_=='c'"> 
+	-
+</span>
+<span ng-if="ngModel.type_=='s'"> 
+	{{(ngModel.surgery.location_notes | cut:true:40) || '-'}}
+</span>
+<span ng-if="ngModel.type_=='a'"> 
+	{{(ngModel.alternative.location | cut:true:40) || '-'}}
+</span>

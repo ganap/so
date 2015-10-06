@@ -1,0 +1,42 @@
+<div layout="row"> 
+	<h6> Observation <span ng-if="bundle.entry.length-1>0 && !viewMode"> (+{{bundle.entry.length-1}})</span></h6>
+	<span flex></span>
+</div>
+
+
+<p ng-if="error"> {{error}} </p>
+<div layout="row" ng-if="!viewMode">
+	<p ng-if="latest">
+		<span ng-repeat="coding in latest.name.coding">{{coding.display}} </span>
+	</p>
+	<p ng-if="latest.valueCodeableConcept">
+		<span ng-repeat="coding in latest.valueCodeableConcept">{{coding.display}}</span>
+	</p>			
+	<b ng-if="latest.valueQuantity" style="padding-left:0.2em;"> 
+		<fd-value-quantity-view ng-model="latest.valueQuantity"></fd-value-quantity-view>
+	</b>			
+	<span flex>  </span>
+	<p ng-show="latest.appliesDateTime" class="fright">Date: {{latest.appliesDateTime | date: 'd/ MMM /yyyy'}}</p>
+</div>
+<div ng-if="viewMode" layout="column"> 
+	<div ng-repeat="observation in bundle.entry" layout="row"> 					
+		<span>{{$index+1}}. </span>
+		<span ng-repeat="coding in observation.content.name.coding">{{coding.display}} </span>
+		<p ng-if="observation.content.valueCodeableConcept">
+		<span ng-repeat="coding in observation.content.valueCodeableConcept">{{coding.display}}</span>
+		</p>	
+		<b ng-if="observation.content.valueQuantity" style="padding-left:0.2em;"> 
+			<fd-value-quantity-view ng-model="observation.content.valueQuantity"></fd-value-quantity-view>
+		</b>
+		<p ng-if="observation.content.related" style="padding-left:0.3em;"> 
+		<fd-related ng-model="observation.content.related"
+			bundle="bundle">
+		</fd-related>
+		</p>
+		<span flex>  </span>
+		<p ng-show="observation.content.appliesDateTime">
+			Date: {{observation.content.appliesDateTime| date: 'd/ MMM /yyyy'}}
+		</p>
+	</div>
+</div>
+

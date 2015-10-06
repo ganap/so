@@ -1,0 +1,36 @@
+<div layout="row">
+	
+	<md-input-container flex="25">
+		<label>{{'day' | uiBirthdayPickerTr: locale | uiBirthdayPickerCapitalize}}</label>
+		<md-select ng-model="birthday.day" ng-disabled="ngDisabled">
+			<md-option ng-repeat="d in [1, daysInMonth] | uiBirthdayPickerMakeRange"
+					value="{{d}}">
+					{{d}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+
+	<md-input-container flex="45">
+		<label>{{'month' | uiBirthdayPickerTr: locale | uiBirthdayPickerCapitalize}}</label>
+		<md-select ng-model="birthday.month" ng-disabled="ngDisabled">
+			<md-option ng-repeat="m in [0, getMaxMonth()] | uiBirthdayPickerMakeRange"
+					ng-selected="m==birthday.month"
+					value="{{m}}">
+					{{localeMonth(m) | uiBirthdayPickerCapitalize}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+
+	<md-input-container flex="30">
+		<label>{{'year' | uiBirthdayPickerTr: locale | uiBirthdayPickerCapitalize}}</label>
+		<md-select ng-model="birthday.year" ng-disabled="ngDisabled">
+			<md-option ng-repeat="y in [minYear, maxYear] | uiBirthdayPickerMakeRange"
+					ng-selected="y==birthday.year"
+					value="{{y}}">
+					{{y}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+
+
+</div>

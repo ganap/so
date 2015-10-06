@@ -1,0 +1,74 @@
+<div layout="column"> 
+	<md-input-container> 
+		<label flex-order="0">Type of treatment</label>
+		<const-select ng-model="ngModel.type_" model-type="TREATMENT_TYPES_CUSTOM_TYPES"
+			flex-order="1"> 
+		</const-select>
+	</md-input-container>
+
+
+	<div ng-if="ngModel.type_=='r'" layout="row">
+		<!--radiation-->
+		<div layout="column" flex="50"> 
+			<md-input-container> 
+				<label>Type of radiation</label>
+				<input type="text" ng-model="ngModel.radiation.type_" >
+			</md-input-container>
+			<md-input-container> 
+				<label>Area of body</label>
+				<input type="text" ng-model="ngModel.radiation.area_of_body" >
+			</md-input-container>
+			<md-input-container> 
+				<label>Dosage</label>
+				<input type="text" ng-model="ngModel.radiation.dosage" >
+			</md-input-container>
+		</div>
+		<div layout="column" flex="50"> 
+			<md-input-container> 
+				<label>Technology used</label>
+				<input type="text" ng-model="ngModel.radiation.technology" >
+			</md-input-container>
+			<md-input-container> 
+				<label>Location of treatment</label>
+				<input type="text" ng-model="ngModel.radiation.location_of_treatment" >
+			</md-input-container>
+		</div>
+	</div>
+
+
+	<div ng-if="ngModel.type_=='c'" layout="column"> 
+		<!--Chemotherapy -->
+		<md-input-container> 
+			<label> Regiment </label>
+			<input type="text" ng-model="ngModel.chemotherapy.regiment" >
+		</md-input-container>
+	</div>
+
+	<div ng-if="ngModel.type_=='s'" layout="column"> 
+		<!--Surgery -->
+		<md-input-container> 
+			<label> Type of surgery </label>
+			<input type="text" ng-model="ngModel.surgery.type_" >
+		</md-input-container>
+		<md-input-container> 
+			<label> Location/Notes</label>
+			<input type="text" ng-model="ngModel.surgery.location_notes" >
+		</md-input-container>
+	</div>
+
+	<div ng-if="ngModel.type_=='a'" layout="column"> 
+		<!--Alternative Treatment -->
+		<md-input-container> 
+			<label> Type of alternative treatment</label>
+			<input type="text" ng-model="ngModel.alternative.type_" >
+		</md-input-container>
+		<md-input-container> 
+			<label> Location of treatment </label>
+			<input type="text" ng-model="ngModel.alternative.location" >
+		</md-input-container>
+	</div>
+
+</div>
+
+
+

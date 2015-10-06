@@ -1,0 +1,84 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+{% block angular_app %}
+<html lang="en" ng-app="App">
+{% endblock %}
+
+{% block css_js_load %}
+<script src="/static/libs/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/static/libs/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"> 
+
+
+<script src="/static/libs/bower_components/cornerstone/dist/cornerstone.js"></script>
+<script src="/static/libs/bower_components/cornerstoneMath/dist/cornerstoneMath.min.js"></script>
+<script src="/static/libs/bower_components/cornerstoneTools/dist/cornerstoneTools.min.js"></script>
+<script src="/static/libs/bower_components/dicomParser/dist/dicomParser.min.js"></script>
+<script src="/static/libs/bower_components/image-jpeg2000/dist/jpx.min.js"></script>
+<script src="/static/libs/bower_components/cornerstoneWADOImageLoader/dist/cornerstoneWADOImageLoader.js"></script>
+
+
+<script src="/static/libs/bower_components/lodash/dist/lodash.min.js"></script>
+
+<script src="/static/libs/bower_components/angular-json-human/dist/angular-json-human.min.js"></script>
+<link rel="stylesheet" href="/static/libs/bower_components/angular-json-human/dist/angular-json-human.min.css">
+
+<link rel="stylesheet" href="/static/whirly.css"> 
+{% load_ng_app 'helpers' %}
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'fhir_docs_app' %}
+{% load_ng_app 'im_app' %}
+{% load_ng_app 'so_app' %}
+{% load_ng_app 'composite_widgets_app' %}
+{% load_ng_app 'cornerstone_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'fhir_providers_app' %}
+{% load_ng_app 'users_app' %}
+{% load_ng_app 'coordinator_app' %}
+{% endblock %}
+
+{% block sidenav_top_btn %}
+<div class="dropdown">
+	<md-button class="md-primary notext-transform" id="profileDropdown" data-toggle="dropdown">
+		<img src="/static/img/moderator-tiny.png" class="img-circle md-whiteframe-z2 ">
+		{{user.username}}				
+		<span class="caret"></span>
+	</md-button>
+	<ul class="dropdown-menu dropdown-profilemenu" aria-labelledby="profileDropdown"
+		 ng-controller="navbarMenuCtrl">
+
+		<li>
+			<a href="javascript:void(0)" ng-click="logout()">
+				<md-icon>power_settings_new</md-icon>
+				Logout
+			</a>
+		</li>
+	</ul>
+</div>
+{% endblock %}
+
+
+{% block sidenav_content %}
+<div ng-controller="urlCtrl">
+	<md-button ng-href="#/dashboard" layout-fill class="md-primary md-raised md-spec first"
+		ng-class="{'active': fullUrl()=='/dashboard'}">
+		<md-icon style="color:white;">dashboard</md-icon>
+		Dashboard	
+	</md-button>
+
+	<md-button ng-href="#/coordinator/patients" layout-fill class="md-primary md-raised md-spec"
+		ng-class="{'active': fullUrl()=='/coordinator/patients'}">
+		<md-icon>face</md-icon>
+		Patients
+	</md-button>	
+	<md-button ng-href="#/coordinator/experts" layout-fill class="md-primary md-raised md-spec"
+		ng-class="{'active': fullUrl()=='/coordinator/experts'}">
+		<i class="fa fa-medkit" style="height:24px; width:24px;font-size: 1.6em;"></i>
+		Experts
+	</md-button>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+{% endblock %}

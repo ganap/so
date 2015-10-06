@@ -1,0 +1,6 @@
+<md-input-container> 
+	<label>Provider for fhir documents</label>
+	<md-select ng-model="currentP" ng-disabled="ngDisabled">
+		<md-option ng-repeat="(alias, pr) in fhirProviders.PROVIDERS" value="{{alias}}">{{pr.name}}</md-option>
+	</md-select>
+</md-input-container>

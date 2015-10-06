@@ -1,0 +1,6 @@
+<div layout-padding>
+	<h6> Please select the EMR provider to import the patient record from </h6>
+	<p> To import the patient record, please select the EMR provider. Then select the patient using view button and click on Add icon.</p>
+	<ui-fhir-providers-list current-provider="provider"></ui-fhir-providers-list>
+	<ui-fhir-documents-list current-provider="provider" on-doc-click="createFromCurrent()"></ui-fhir-documents-list>
+</div>

@@ -1,0 +1,15 @@
+<!--
+<p> 
+Contact Type: <span class="text-primary">{{const.getKeyByVal('CONTACT_POINT_SYSTEM_TYPES',contact.system)}}</span>
+</p>
+-->
+<p> 
+{{valuePlaceholder}}: 	<span class="text-primary">{{contact.value}}</span>
+</p>
+<p ng-show="contact.use"> 
+Назначение:  <span class="text-primary">{{const.getKeyByVal('CONTACT_POINT_USE_TYPES', contact.use)}}</span>
+</p>
+<p ng-if="contact.period.start.length || contact.period.end.length">
+Period: 
+<cw-period-view period="contact.period"></cw-period-view>
+</p>

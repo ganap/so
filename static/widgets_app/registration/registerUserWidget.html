@@ -1,0 +1,74 @@
+<md-content layout="column" ng-hide="showRegisterComplete || showRegisterFail">
+ <form name="form_reg"  novalidate="novalidate">
+	<md-input-container>
+		<label>Profile name (username)</label>
+		<input required username-available name="username" ng-model="user.username" type="text">
+		<div ng-messages="form_reg.username.$error"  >
+			<div ng-message="required">[required]</div>
+			<div ng-message="usernameExists">[already exists]</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container>
+		<label>Email address</label>
+		<input required email-available name="email" ng-model="user.email" type="email">
+		<div ng-messages="form_reg.email.$error"  >
+			<div ng-message="required">[required]</div>
+			<div ng-message="email">[invalid email]</div>
+			<div ng-message="emailExists">[already exists]</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container>
+		<label>Password</label>
+		<input required easy-password name="password1" ng-model="user.password1" type="password">
+		<div ng-messages="form_reg.password1.$error"  >
+			<div ng-message="easyPassword">[password is too easy]</div>
+			<div ng-message="required">[required]</div>
+		</div>
+	</md-input-container>
+
+	<md-input-container>
+		<label>Retype Password</label>
+		<input required easy-password name="password2" ng-model="user.password2" type="password" 
+				data-password-verify="user.password1">
+		<div ng-messages="form_reg.password2.$error"  >
+			<div ng-message="passwordVerify">[password mismatch]</div>
+			<div ng-message="required">[required]</div>
+		</div>
+	</md-input-container>
+
+	<h4 ng-show="disableForm"> Creating account... </h4>
+	<br>
+	<md-button class="md-raised md-primary" ng-disabled="form_reg.$invalid"
+		ng-hide="disableForm" ng-click="register()">
+		Sign Up
+	</md-button>
+</form>
+</md-content>
+
+
+<div ng-show="showRegisterComplete">
+	<h3> All done! </h3>
+	<br>
+	<h4> Now you can login. </h4>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</div>
+<div ng-show="showRegisterFail">
+	<h3 style="color: red;"> Oooops! </h3>
+	<br>
+	<h4 class="form-error" style="color: red;"> {{error}} </h4>
+	<br>
+	<br>
+	<md-button class="md-raised md-accent" ng-click="restartRegistration()">
+		Start Again	
+	</md-button>
+	<br>
+	<br>
+
+
+</div>

@@ -1,0 +1,215 @@
+<form ng-show="!init && !loading" name="form" layout="column"> 
+	<h6>Please record your values for the day</h6>
+	<p ng-if="time_left_to_next_measure"> You can add values for the next day in <b>{{time_left_to_next_measure}}</b> </p>
+		
+	<div layout="row" layout-sm="column" layout-fill >
+		<md-card class="measurements-general-well-being" layout-padding flex="49" flex-sm="100"> 
+			<h6>General Well Being</h6>
+			<ul class="list-inline center"> 
+				<li class="smile-title"> 
+					Anxiety:	
+				</li>
+				<li> 
+					<m-smile-line type='face' ng-model="daily.gwb_anxiety"></m-smile-line>			
+				</li>
+			</ul>
+			<ul class="list-inline center"> 
+				<li class="smile-title"> 
+					Concentration:	
+				</li>
+				<li> 
+					<m-smile-line type='face' ng-model="daily.gwb_concentration"></m-smile-line>			
+				</li>
+			</ul>
+			<ul class="list-inline center"> 
+				<li class="smile-title"> 
+					Energy:	
+				</li>
+				<li> 
+					<m-smile-line type='face' ng-model="daily.gwb_energy"></m-smile-line>			
+				</li>
+			</ul>
+			<ul class="list-inline center"> 
+				<li class="smile-title"> 
+					Stress:	
+				</li>
+				<li> 
+					<m-smile-line type='face' ng-model="daily.gwb_stress"></m-smile-line>			
+				</li>
+			</ul>
+		</md-card>
+		<span flex style="max-width:1em;"></span>
+		<md-card class="measurements-general-well-being" layout-padding flex="49" flex-sm="100"> 
+			<h6>I Took This Today</h6>
+			<fd-medication-select ng-model="daily.i_took_today.medication" fhir-doc="userProfile.user.fhir_doc"> 
+			</fd-medication-select>
+			<md-input-container> 
+				<label>Dosage</label>
+				<input type="text" ng-model="daily.i_took_today.dosage" >
+			</md-input-container>
+
+			<fd-treatment-select ng-model="daily.i_took_today.treatment" fhir-doc="userProfile.user.fhir_doc"> 
+			</fd-treatment-select>
+		</md-card>
+	</div>
+
+	<md-card layout="column" layout-padding class="measurements-symptoms" >
+		<h6> Symptoms & Side Effects </h6>
+		<div layout="row" layout-margin layout-sm="column"> 
+			<div flex="50" flex-sm="100"> 
+				<p> Pain & Fever </p>
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Fever:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_fever"></m-smile-line>			
+					</li>
+				</ul>				
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						General Pain:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_general_pain"></m-smile-line>			
+					</li>
+				</ul>	
+				<p> Neurogical & Mood </p>
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Sensory problems:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_sensory_problems"></m-smile-line>			
+					</li>
+				</ul>	
+				<p> Gastrointestinal </p>
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Diarrhea:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_diarrhea"></m-smile-line>			
+					</li>
+				</ul>				
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Nausea:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_nausea"></m-smile-line>			
+					</li>
+				</ul>	
+			</div>
+
+			<div flex="50" flex-sm="100"> 
+				<p> Hair, Skin & Swelling </p>
+				<ul class="list-inline center"> 
+					<li class="smile-title center"> 
+						Hair-loss:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_hair_loss"></m-smile-line>			
+					</li>
+				</ul>				
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Mouth Sores:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_mouth_sores"></m-smile-line>			
+					</li>
+				</ul>				
+				<p> Sleep & Cardiovascular </p>
+				<ul class="list-inline center"> 
+					<li class="smile-title"> 
+						Fatigue:	
+					</li>
+					<li> 
+						<m-smile-line type='number' ng-model="daily.ss_fatigue"></m-smile-line>			
+					</li>
+				</ul>	
+			</div>
+		</div>
+	</md-card>
+
+
+
+	<div layout="row" layout-fill class="measurements-vital">
+		<md-card layout="column" flex="49" layout-padding> 
+			<h6> Vitals </h6>
+			<md-input-container>
+				<label>Body temperature ({{'temperature' | units : measurements.units}})</label>
+			    <input type="number" min=1 name="body_temperature" step="any" ng-model="daily.body_temperature">
+				<div ng-messages="form.body_temperature.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>			
+			<md-input-container>
+			    <label>Basal body temperature ({{'temperature' | units : measurements.units}})</label>
+			    <input type="number" min=1 name="basal_body_temperature" step="any" ng-model="daily.basal_body_temperature">
+				<div ng-messages="form.basal_body_temperature.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>	
+			<md-input-container>
+			    <label>Respiratory rate (number of breaths/minute)</label>
+			    <input type="number" min=1 name="respiratory_rate" step="any" ng-model="daily.respiratory_rate">
+				<div ng-messages="form.respiratory_rate.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>	
+			<md-input-container>
+				<label>My weight ({{'weight' | units : measurements.units}})</label>
+			    <input type="number" min=1 name="body_mass" step="any" ng-model="daily.body_mass">
+				<div ng-messages="form.body_mass.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>				 
+		</md-card>
+		<span flex style="max-width:1em;"></span>
+		<md-card layout="column" flex="49" layout-padding> 
+			<h6> Vitals </h6>
+			<md-input-container>
+			    <label>Blood pressure systolic (mm Hg)</label>
+			    <input type="number" min=1 name="blood_pressure_systolic" step="any" ng-model="daily.blood_pressure_systolic">
+				<div ng-messages="form.blood_pressure_systolic.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>			
+			<md-input-container>
+			    <label>Blood pressure diastolic (mm Hg)</label>
+			    <input type="number" min=1 name="blood_perrure_diastolic" step="any" ng-model="daily.blood_pressure_diastolic">
+				<div ng-messages="form.blood_perrure_diastolic.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>	
+			<md-input-container>
+			    <label>Heart rate (count/minute)</label>
+			    <input type="number" min=1 name="heart_rate" step="any" ng-model="daily.heart_rate">
+				<div ng-messages="form.heart_rate.$error">
+					<div ng-message="number">[not a number]</div>
+				 </div>
+			 </md-input-container>			
+		</md-card>
+	</div>
+
+	<md-card layout-padding class="measurements-vital"> 
+		<h6> Journal Entry </h6>
+		<small> Use your daily check-in to record your health issues and experiences. How are you feeling today? </small>
+		<textarea ng-model="daily.journal_entry" style="resize: vertical; min-width:3em;"></textarea>
+	</md-card>
+
+
+
+
+		<md-button class="md-btn-bottom-right-fixed md-fab"
+			ng-click="saveDailyMeasure()" ng-disabled="form.$invalid">
+			<md-icon style="color:white;">save</md-icon>
+			<md-tooltip ng-if="!time_left_to_next_measure"> SAVE </md-tooltip>
+			<md-tooltip ng-if="time_left_to_next_measure"> UPDATE </md-tooltip>
+		</md-button>
+
+
+
+</form>

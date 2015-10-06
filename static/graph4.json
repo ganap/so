@@ -1,0 +1,53 @@
+{
+	"nodes":[
+		{
+			"username": "Hello",
+			"group":1,
+			"main":true,
+			"expert":"",
+			"pk":2
+		},
+		{
+			"username": "Admin",
+			"relationShip":["Friend", "Wife"],
+			"is_admin":true,
+			"group":1,
+			"expert":""
+		},
+		{
+			"username": "Moderator",
+			"relationShip":["Friend", "Wife"],
+			"is_moderator":true,
+			"group":1,
+			"expert":"",
+			"pk":3
+		}
+,
+		{
+			"username": "Moderator",
+			"relationShip":["Friend", "Wife"],
+			"group":1,
+			"expert":{"name":{"given":["Fitch", "P."], "family":["Cats"]}}
+		}		
+	],
+	"links":[
+		{
+			"source": 0 ,
+			"target":1,
+			"value":1
+		},
+		{
+			"source":0,
+			"target":2,
+			"value":1
+		}
+		,
+		{
+			"source":0,
+			"target":3,
+			"value":1
+		}
+		
+	]
+
+}

@@ -1,0 +1,28 @@
+<style>
+.bootstrap-datetimepicker-widget table td.disabled, .bootstrap-datetimepicker-widget table td.disabled:hover{
+	background-color: #FDFDFD;
+	color: #EFEFEF;
+}
+.datetime-picker-period{
+	margin-left:1em;
+}
+.datetime-picker-period .list-inline{
+	margin-left:11px;
+}
+</style>
+
+<bs-checkbox ng-model="use_period" label="{{label || 'Диапазон времени'}}"></bs-checkbox>
+<div class="row datetime-picker-period" ng-if="use_period"> 
+	<ul ng-show="period.start || period.end" class="list-inline" style="margin-bottom:0px;">
+		<li ng-show="period.start">From <b class="text-primary">{{period.start | date: 'MMM d, y h:mm:ss a'}};</b></li>
+		<li ng-show="period.end"> Until <b class="text-primary">{{period.end | date: 'MMM d, y h:mm:ss a'}}; </b></li>
+	</ul>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
+		<bs-checkbox ng-model="disable.start" label="Disable start date"></bs-checkbox>
+		<datetime-picker date="period.start" ></datetime-picker>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6"> 
+		<bs-checkbox ng-model="disable.end" label="Disable end date"></bs-checkbox>
+		<datetime-picker date="period.end" min-date="period.start" ></datetime-picker>
+	</div>
+</div>

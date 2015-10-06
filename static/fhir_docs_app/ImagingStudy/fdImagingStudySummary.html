@@ -1,0 +1,34 @@
+<div layout="flex"> 
+	<h6> Imaging Study <span ng-if="bundle.entry.length-1>0 && !viewMode"> (+{{bundle.entry.length-1}})</span></h6>
+	<span flex></span>
+</div>
+
+
+<p ng-if="error"> {{error}} </p>
+<div layout="row" ng-if="!viewMode">
+	<p ng-if="latest">
+		{{latest.description}}
+	</p>
+	<span flex>  </span>
+	<p ng-show="latest.dateTime" class="fright">Date: {{latest.dateTime | date: 'd/ MMM /yyyy'}}</p>
+</div>
+<div ng-if="viewMode" layout="column"> 
+	<div ng-repeat="study in bundle.entry" layout="row"> 					
+		<span>{{$index+1}}. </span>
+		<p>{{study.content.description}} </p>
+		<b style="padding-left:0.2em;"> 
+			{{latest.numberOfSeries}}/{{latest.numberOfInstances}}
+		</b>
+		<span ng-if="study.content.modality"> ( <span ng-repeat="modality in study.content.modality">{{modality}} </span>)</span>
+		<p ng-if="study.content.related" style="padding-left:0.3em;"> 
+		<fd-related ng-model="study.content.related"
+			bundle="bundle">
+		</fd-related>
+		</p>
+		<span flex>  </span>
+		<p ng-show="study.content.dateTime">
+			Date: {{study.content.dateTime| date: 'd/ MMM /yyyy'}}
+		</p>
+	</div>
+</div>
+

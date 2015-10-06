@@ -1,0 +1,42 @@
+<md-card layout-padding class="providerPatient" ng-show="!loading && !error">
+	<div ng-include="'/static/composite_widgets_app/patient/sharedPatientSummary.html'"></div>
+	<p ng-if="expert"> 
+		<b style="padding-left:0.2em;" class="text-primary"> Assigned to: </b>
+		{{expert.expert.name.prefix[0]}} {{expert.expert.name.given[0]}} {{expert.expert.name.family[0]}} {{expert.expert.name.suffix[0]}}
+	</p>
+
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-primary nomargin-top-bottom"
+			ng-show="allowGetCase" ng-click="onGetCase(patient)"> 
+			Accept Case
+		</md-button>
+		<md-button class="md-primary nomargin-top-bottom"
+			ng-show="allowRefuseCase" ng-click="onRefuseCase(patient)"> 
+			Decline Case
+		</md-button>
+
+		<md-button class="md-primary nomargin-top-bottom"
+			ng-click="onAssign(patient)" ng-hide="expert || userProfile.user.is_expert">
+			Assign to
+		</md-button>
+		<md-button class="md-primary nomargin-top-bottom"
+			ng-click="dialogsAndVideoIm.startChatWith(expert)" 
+			ng-show="expert && !userProfile.user.is_expert">
+			Chat with expert	
+		</md-button>
+		<md-button class="md-primary nomargin-top-bottom" 
+				ng-click="dialogsAndVideoIm.startChatWith(patient)">
+			Chat	
+		</md-button>				
+		<md-button class="md-primary nomargin-top-bottom" ng-href="#/patients/view/{{patient.pk}}?so={{so.so_pk}}">
+			View	
+		</md-button>	
+	</div>		
+</md-card>
+
+<md-card layout-padding class="providerPatient" ng-if="loading || error"> 
+	<br>
+	<spinner-loader ng-show="loading" label="Please wait..."> 
+	</spinner-loader>
+	<h5 class="text-danger center"> {{error}} </h5>
+</md-card>

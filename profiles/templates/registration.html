@@ -1,0 +1,147 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+
+{% block angular_app %}
+<html lang="en" ng-app="App">
+{% endblock %}
+
+{% block css_js_load %}
+{{block.super}}
+
+<link rel='stylesheet prefetch' href='/static/libs/login/css/gubja.css'>
+<link rel='stylesheet prefetch' href='/static/libs/login/css/yaozl.css'>
+<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/static/libs/login/css/style.css">
+<link rel="stylesheet" href="/static/libs/login/login.css"> 
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'login_register_app' %}
+
+{% endblock %}
+
+{% block css_paper %}
+
+{% endblock %}
+
+
+{% block body %}
+<style> 
+.error{
+	margin-top:-15px;
+}
+input.ng-invalid{
+	box-shadow:none !important;
+}
+</style>
+{% verbatim %}
+<div class="container" ng-controller="registrationCtrl">
+	<div id="login" class="signin-card" style="margin-top:25px;">
+		<div class="logo-image">
+			<a href="/home.html"> 
+				<img src="/static/img/logo_small.png" alt="Logo" title="Logo" >
+			</a>
+		</div>
+		<a href="/home.html" style="text-decoration: none;"> 
+			<h1 class="display1">Hygeiais</h1>
+		</a>
+		<p class="subhead">Registration</p>
+		<form name="form_reg" novalidate="novalidate" ng-hide="showRegisterComplete || showRegisterFail">
+
+			<div id="form-login-username" class="form-group">
+				<input id="username" class="form-control login-username" name="username" type="text" size="18"  ng-model="user.username" required username-available>
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="username" class="float-label">Username</label>
+			</div>
+			<div ng-messages="form_reg.username.$error"  class="text-center text-danger error"
+				ng-if="form_reg.username.$error">
+				<div ng-message="required">[required]</div>
+				<div ng-message="usernameExists">[already exists]</div>
+			</div>		
+
+
+			<div id="form-login-username" class="form-group">
+				<input id="username" class="form-control login-username" name="email" type="email" size="18"  ng-model="user.email" required email-available>
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="username" class="float-label">Email address</label>
+			</div>
+			<div ng-messages="form_reg.email.$error" class="text-center text-danger error"
+				ng-if="form_reg.email.$error">
+				<div ng-message="required">[required]</div>
+				<div ng-message="email">[invalid email]</div>
+				<div ng-message="emailExists">[already exists]</div>
+			</div>
+
+
+
+			<div id="form-login-password" class="form-group">
+				<input id="passwd" class="form-control login-password" name="password1" type="password" size="18" alt="password" ng-model="user.password1" required easy-password>
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="password" class="float-label">Password</label>
+			</div>
+			<div ng-messages="form_reg.password1.$error"  class="text-center text-danger error" 
+				ng-if="form_reg.password1.$error">
+				<div ng-message="easyPassword">[password is too easy]</div>
+				<div ng-message="required">[required]</div>
+			</div>
+			<div id="form-login-password" class="form-group" class="text-center text-danger error">
+				<input id="passwd" class="form-control login-password" name="password2" type="password" size="18" alt="password" ng-model="user.password2" data-password-verify="user.password1" required>
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="password" class="float-label">Retype Password</label>
+			</div>
+			<div ng-messages="form_reg.password2.$error"  class="text-center text-danger error" 
+				ng-if="form_reg.password2.$error">
+				<div ng-message="passwordVerify">[password mismatch]</div>
+				<div ng-message="required">[required]</div>
+			</div>
+
+
+
+
+			<div layout="column" style="padding-top:15px;" ng-hide="disableForm">
+				<button class="btn btn-block btn-info ripple-effect" 
+					ng-click="register()" ng-disabled="form_reg.$invalid">
+					Sign Up
+				</button>  
+				<div layout="row" class="forgot-password-registration" layout-fill> 
+					<forgot-password-link> 
+					</forgot-password-link>
+					<a class="btn btn-block btn-info ripple-effect" href="/login">
+						Login	
+					</a>  
+				</div>
+			</div>
+			<div ng-show="disableForm"> 
+				<br>
+				<h4 class="text-center"> Please wait... </h4>
+			</div>
+	</form>
+	<div ng-show="showRegisterComplete">
+		<br>
+		<h3 class="text-center"> All done! </h3>
+		<br>
+		<h4 class="text-center"> Now you can <a href="/login">login</a>. </h4>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+	<div ng-show="showRegisterFail">
+		<br>
+		<h3 class="text-danger text-center"> Oooops! </h3>
+		<br>
+		<h4 class="text-danger text-center"> {{error}} </h4>
+		<br>
+		<br>
+		<button class="btn btn-block btn-info ripple-effect" ng-click="restartRegistration()">
+			Start Again	
+		</button>
+	</div>	
+		</div>
+</div>
+{% endverbatim %}
+{% endblock %}

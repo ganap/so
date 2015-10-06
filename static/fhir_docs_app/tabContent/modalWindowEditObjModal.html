@@ -1,0 +1,33 @@
+<md-dialog aria-label="{{ctrl.parent.title}}" class="md-dialog-small">
+	<md-toolbar>
+	<div class="md-toolbar-tools">
+		<h5>{{ctrl.parent.title}}</h5>
+		<span flex></span>
+		<md-button class="md-icon-button" ng-click="ctrl.parent.cancel()">
+			<md-icon>close</md-icon>
+		</md-button>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="max-width:800px;max-height:810px; min-width:400px; padding-top:0px; padding-bottom:0px;">
+		
+		<div ng-include="ctrl.parent.templateUrl"></div>
+
+	</md-dialog-content>
+	<div class="md-actions" layout="row" layout-align="center">
+		<span flex></span>
+
+		<!--
+		<md-button ng-click="ctrl.parent.delete()" >
+			Delete
+		</md-button>
+		-->
+
+		<md-button ng-click="ctrl.parent.cancel()" >
+			Cancel
+		</md-button>
+		<md-button ng-click="ctrl.parent.done()" style="margin-right:20px;" >
+			Done
+		</md-button>
+		<span flex></span>
+	</div>
+</md-dialog>

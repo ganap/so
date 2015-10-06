@@ -1,0 +1,62 @@
+<style> 
+label.uploadlabel {
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.846;
+    color: #666666;
+    white-space: nowrap;
+}
+
+label.uploadlabel input {
+    display: none;   
+}
+
+label.uploadlabel:hover, label.uploadlabel:focus{
+	text-decoration: none;
+    color: #141414;
+    background-color: #eeeeee;
+}
+
+</style>
+<ul class="list-inline uploadDropdown"> 
+	<li ng-show="!error && !uploading"> 
+
+	<div class="dropdown">
+		<button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			<span class="glyphicon glyphicon-upload"></span>
+			Upload
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><label class="uploadlabel">
+				<input type="file" file-model="doc" accept=".png, .jpg, .jpeg, .tiff">Photo/Picture</label>
+			</li>
+			<li><label class="uploadlabel">
+				<input type="file" file-model="doc" accept="text/plain, application/pdf">PDF or text file</label>
+			</li>
+			<li><label class="uploadlabel">
+				<input type="file" file-model="doc" accept=".dicom, .dcm">DICOM file</label>
+			</li>
+		</ul>
+	</div>
+	</li>
+	<li class="progress-li" ng-if="uploading"> 
+	<div class="progress progress-striped active">
+		<div class="progress-bar progress-bar-warning" style="width: {{progress}}%">
+			Uploading...
+		</div>
+	</div>
+	</li>
+	<li ng-if="error"> 
+		<b class="text-danger"> {{error}} </b>
+	</li>
+	<li ng-if="error || uploading"> 
+		<button class="btn btn-danger btn-sm" ng-click="onReset()">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+	</li>
+</ul>

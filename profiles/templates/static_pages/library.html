@@ -1,0 +1,220 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+
+
+{% block css_js_load %}
+<link rel="shortcut icon" href="http://dev-cancerinfohub.pantheon.io/sites/all/themes/cancerinfo/favicon.ico" type="image/vnd.microsoft.icon">
+<style>
+@import url("http://dev-cancerinfohub.pantheon.io/modules/system/system.base.css?nvqnsg");
+</style>
+<style>
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/colorbox_node/colorbox_node.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/modules/field/theme/field.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/contrib/views/css/views.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/contrib/ckeditor/css/ckeditor.css?nvqnsg");
+</style>
+<style>
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/contrib/ctools/css/modal.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/custom/cancerinfo_custom/css/jquery.treeview.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/colorbox/styles/stockholmsyndrome/colorbox_style.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/contrib/ctools/css/ctools.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/contrib/lightbox2/css/lightbox.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/modules/modal_forms/css/modal_forms_popup.css?nvqnsg");
+</style>
+<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" media="all">
+<link type="text/css" rel="stylesheet" href="/static/style-home.css" media="all">
+<style>
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/themes/bootstrap/css/overrides.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/themes/cancerinfo/css/style.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/themes/cancerinfo/css/fonts.css?nvqnsg");
+@import url("http://dev-cancerinfohub.pantheon.io/sites/all/themes/cancerinfo/css/custom_styles.css?nvqnsg");
+</style>
+
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'login_app' %}
+{% load_ng_app 'helpers' %}
+{% endblock %}
+{% block css_paper %}
+
+{% endblock %}
+
+{% block sidenav_btm_btn %}
+{% endblock %}
+
+
+{% block sidenav_content %}
+
+		{% if not user.is_athenticated %}
+			<md-button ng-click="logout()" layout-fill class="md-primary md-raised md-spec top-border btm-border"
+				ng-href="/login">
+				<i class="fa fa-sign-in" style="height:24px; width:24px;font-size: 1.6em; padding:3px;"></i>
+				Login	
+			</md-button>
+			<md-button  layout-fill class="md-primary md-raised md-spec active btm-border" 
+				ng-href="/library">
+				<i class="fa fa-book" style="height:24px; width:24px;font-size: 1.6em; padding:1px;"></i>
+				Library	
+			</md-button>
+			<md-button  layout-fill class="md-primary md-raised md-spec btm-border" 
+				ng-href="/about-so">
+				<md-icon style="color:white;" class="md-default-theme material-icons">supervisor_account</md-icon>
+				Second Opinion
+			</md-button>
+
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<md-button  layout-fill class="md-primary md-raised md-spec btm-border  top-border" 
+				ng-href="/about.html">
+				<i class="fa fa-info-circle" style="height:24px; width:24px;font-size: 1.6em; padding:1px;"></i>
+				About	
+			</md-button>
+			<md-button  layout-fill class="md-primary md-raised md-spec btm-border top-border" 
+				ng-href="/team.html">
+				<i class="fa fa-users" style="height:24px; width:24px;font-size: 1.3em; padding:1px;"></i>
+				Team	
+			</md-button>
+			<md-button  layout-fill class="md-primary md-raised md-spec btm-border top-border" 
+				ng-href="/contact.html"
+				style="margin-bottom:1px;">
+				<i class="fa fa-phone-square" style="height:24px; width:24px;font-size: 1.3em; padding:1px;"></i>
+				Contact	
+			</md-button>
+		{% endif %}
+
+{% endblock %}
+
+{% block page_content %}
+
+<div id="skip-link">
+	<a href="http://dev-cancerinfohub.pantheon.io/#main-content" class="element-invisible element-focusable">Skip to main content</a>
+</div>
+<div class="page" style="padding-left:0px;">
+	<div class="nav-wrapper">
+		<header id="navbar" role="banner" class="navbar container navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+
+					<a class="name navbar-brand" href="./Home Page _ Hygeiais Library_files/Home Page _ Hygeiais Library.html" title="Home">Hygeiais Library</a>
+
+					<!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+
+				<div class="navbar-collapse collapse">
+					<nav role="navigation">
+
+						<div class="region region-navigation">
+							<section id="block-cancerinfo-custom-browse-cancer-list" class="block block-cancerinfo-custom clearfix">
+								<a href="http://dev-cancerinfohub.pantheon.io/browse-cancers/nojs" class="ctools-use-modal ctools-use-modal-processed">Browse Cancers</a>
+							</section> <!-- /.block -->
+							<section id="block-views-exp-cancer-search-page" class="block block-views clearfix">
+
+
+								<form action="http://dev-cancerinfohub.pantheon.io/cancer-search" method="get" id="views-exposed-form-cancer-search-page" accept-charset="UTF-8"><div><div class="views-exposed-form">
+											<div class="views-exposed-widgets clearfix">
+												<div id="edit-combine-wrapper" class="views-exposed-widget views-widget-filter-combine">
+													<div class="views-widget">
+														<div class="form-type-textfield form-item-combine form-item form-group">
+															<input placeholder="Search" class="form-control form-text" type="text" id="edit-combine" name="combine" value="" size="30" maxlength="128">
+														</div>
+													</div>
+												</div>
+												<div class="views-exposed-widget views-submit-button">
+													<button class="btn form-submit btn-search" id="edit-submit-cancer-search" name="" value="Apply" type="submit">Apply</button>
+												</div>
+											</div>
+										</div>
+								</div></form>
+							</section> <!-- /.block -->
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+	</div>
+
+	<div class="main-container container">
+
+		<header role="banner" id="page-header">
+
+		</header> <!-- /#page-header -->
+
+		<div class="row">
+
+
+			<section class="col-sm-12">
+				<a id="main-content"></a>
+				<!--<h1 class="page-header"></h1>-->
+				<div class="region region-content">
+					<section id="block-system-main" class="block block-system clearfix">
+
+
+						<div id="node-199" class="node node-page node--page--full clearfix" about="/content/home-page" typeof="foaf:Document">
+
+
+							<span property="dc:title" content="Home Page" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="0" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
+
+							<div class="content">
+							</div>
+
+
+
+						</div>
+
+					</section> <!-- /.block -->
+					<section id="block-block-1" class="block block-block clearfix">
+
+
+						<div class="row front-content">
+							<div class="col-md-6">
+								<iframe frameborder="0" height="300" src="https://player.vimeo.com/video/101463704?color=ffffff&amp;title=0&amp;byline=0&amp;portrait=0" width="100%"></iframe>
+							</div>
+							<div class="col-md-6">
+								<h2>Hygeiais makes navigating your health easy.</h2>
+								<p>Nunc sagittis ornare lacus. Suspendisse varius dapibus feugiat. Duis convallis metus dui, vitae lobortis elit rutrum vel. Etiam dui ipsum, consequat at eleifend et, euismod ac mauris. Etiam sed faucibus lacus. Suspendisse eget dapibus felis. Aliquam vehicula eleifend est vel tristique. Aliquam non ipsum tellus. Nam cursus arcu vitae ullamcorper placerat. Nullam a quam eu sapien fringilla feugiat. Nullam dictum ante sed mi scelerisque porttitor sit amet et orci. Vivamus interdum ipsum a dapibus viverra.</p>
+							</div>
+						</div>
+
+					</section> <!-- /.block -->
+				</div>
+			</section>
+
+
+		</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<footer class="footer container">
+		<div class="region region-footer">
+			<section id="block-block-2" class="block block-block clearfix">
+
+
+				<p>Follow us on <a href="javascript:void()">Twitter</a>, <a href="javascript:void()">Facebook</a>, and <a href="javascript:void()">Google+</a></p>
+				<p>© 2015 Hygeiais <em>/</em> All rights reserved <em>/</em> <a href="http://dev-cancerinfohub.pantheon.io/privacy.html">Privacy Policy</a> <em>/</em> <a href="http://dev-cancerinfohub.pantheon.io/tnc.html">Terms &amp; Conditions</a></p>
+
+			</section> <!-- /.block -->
+		</div>
+	</footer>
+	</div>
+
+</div>
+
+
+{% endblock %}

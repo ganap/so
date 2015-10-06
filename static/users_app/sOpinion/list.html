@@ -1,0 +1,101 @@
+<div layout="column" layout-padding> 
+	<div ng-if="loading"> 
+		<br>
+		<br>
+		<spinner-loader ng-show="true" label="Please wait..."></spinner-loader>
+	</div>
+	<div ng-if="!queue.opened.length && !queue.in_progress.length && !loading" layout-padding> 
+		<style> 
+		p{
+			text-indent:1.5em;
+		}
+		</style>
+		<h6 style="margin-left:1.5em;"> How long will it take to receive my medical second opinion? </h6>
+		<br>
+		<p> The timeframe for rendering your online medical second opinion is typically 3 - 5 business days. However, the duration of time does not begin until our care team have processed through all of the materials they have received and determined that they have all of the necessary medical records from the patient and an appropriate physician is available and assigned the case. Our triage nurses are meticulous at document preparation for the physician rendering the second opinion since this is a key piece in making sure that the most comprehensive report is provided to the patient making the second opinion request to Hygeiais.  </p>
+		<p> The timeframe may be delayed by a few days when any of the following circumstances apply:  </p>
+		<ul> 
+			<li> 
+				If a pathology review is required for your second opinion
+			</li>
+			<li> 
+				If the specialty physician required to complete your second opinion is not available at the time of your request or you have requested a specific physician to complete the second opinion and they are not currently available (note: the most appropriate physician specialist will be determined by our medical team)
+			</li>
+			<li> 
+				Some complicated cases may benefit from our multi-specialty group and institute based model of medical practice. For cases in which multiple specialists may need to collaborate, an additional few days may be required.
+			</li>
+			<li> 
+				Weekends and holidays are not included in the 10-14 day timeframe; strictly business days
+			</li>
+		</ul>
+		<p> Our goal is to deliver a comprehensive second opinion to you so you can make an informed decision about your health or the health of a loved one. In the event there will be any delay in rendering your online second opinion, you will be contacted by the MyConsult office.  </p>
+		<p> <b>Please Note:</b> If you send materials from outside the U.S., it typically takes three to five days for them to reach our office so please factor delivery time onto the turnaround time. </p>
+		<md-button class="md-fab md-btn-bottom-right-fixed" ng-href="#/patient/so/request">
+			<md-icon style="color:white;">people</md-icon>
+			<md-tooltip> 
+				Request Opinion
+			</md-tooltip>
+		</md-button>
+	</div>
+
+
+
+
+	<div ng-if="queue.opened.length>0 && !loading"> 
+		<p> <b> Requesting date: </b> {{queue.opened[0].date | date: 'd/ MMM /yyyy'}} </p>
+		<p ng-if="queue.opened[0].assigned_to==0"> Your request has been submitted, Coordinator will review and assign an Expert. </p>
+		<p ng-if="queue.opened[0].assigned_to>0">
+		<b> Status: </b> Expert <b><sw-human-name-view ng-model="expert.expert.name"></sw-human-name-view></b> has been assigned.
+		</p>
+		<md-button class="md-raised md-primary" ng-click="sOpinion.ws.sendSignal.cancelRequest()"> 
+			Cancel request
+		</md-button>
+	</div>
+	<div ng-if="queue.in_progress.length>0 && !loading"> 
+		<p> <b> Requesting date: </b> {{queue.in_progress[0].date | date: 'd/ MMM /yyyy'}} </p>
+		<p> 
+			<b> Status: </b> Expert <b><sw-human-name-view ng-model="expert.expert.name"></sw-human-name-view></b> has started working on your case.
+		</p>
+	</div>
+	
+
+
+
+
+	<div ng-show="so_cases.processed.length" layout-padding> 
+		<h6> Processed cases </h6>
+		<md-card layout-padding ng-repeat="case in so_cases.processed"> 
+			<b ng-hide="case.show">Previous diagnosis: {{case.request_info.previous}} </b>
+			<div ng-show="case.show"> 
+				<so-diagnosis-full-view diagnosis="case"></so-diagnosis-full-view>
+			</div>
+			<div class="md-actions" layout="row" layout-align="end center" ng-hide="case.show">
+				<md-button class="md-primary nomargin-top-bottom" ng-click="case.show=true; markAsViewed(case.pk)">
+					Show Second Opinion	
+				</md-button>
+			</div>				
+		</md-card>
+	</div>
+
+
+
+
+
+	<div ng-show="so_cases.closed.length" layout-padding> 
+		<h6> Closed cases </h6>
+		<md-card layout-padding ng-repeat="case in so_cases.closed"> 
+			<b ng-hide="case.show">Previous diagnosis: {{case.request_info.previous}} </b>
+			<div ng-show="case.show"> 
+				<so-diagnosis-full-view diagnosis="case"></so-diagnosis-full-view>
+			</div>
+			<div class="md-actions" layout="row" layout-align="end center" ng-hide="case.show">
+				<md-button class="md-primary nomargin-top-bottom" ng-click="case.show=true; markAsViewed(case.pk)">
+					Show Second Opinion	
+				</md-button>
+			</div>				
+		</md-card>
+	</div>
+
+
+
+</div>

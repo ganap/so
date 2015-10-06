@@ -1,0 +1,49 @@
+{% verbatim %}
+	<md-sidenav class="md-sidenav-right md-whiteframe-z4" md-component-id="right-dialog-list"
+		 layout-fill md-dynamic-height>
+		<md-content ng-controller="sidenavDialogCtrl" layout="column">
+			<div layout="row" class="im-dialog-action-bar">
+				<h6> Dialogs </h6>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="closeDialogList()"> 
+					<md-icon>close</md-icon>
+				</md-button>
+			</div>
+
+			<im-dialog-user-list on-user-dialog-click="onUserDialogClick()"> 
+			</im-dialog-user-list>
+		</md-content>
+	</md-sidenav>
+
+	
+	<md-sidenav class="md-sidenav-right md-sidenav-dialog-msg md-whiteframe-z4" md-component-id="right-dialog-msg-list"
+		 layout-fill md-dynamic-height>
+		<md-content ng-controller="sidenavDialogMsgCtrl" layout="column">
+			<div layout="row" class="im-dialog-action-bar">
+				<h6> Chat with {{dialogsAndVideoIm.currentDialog.dialog_with_user.username}}</h6>
+				<span flex></span>
+				<md-button class="md-icon-button" ng-click="showDialogList()"> 
+					<md-icon>arrow_back</md-icon>
+					<md-tooltip>Back</md-tooltip>
+				</md-button>
+				<md-button class="md-icon-button" ng-click="callToUser(dialogsAndVideoIm.currentDialog.dialog_with_user.pk)"
+					ng-disabled="!dialogsAndVideoIm.isUserPkOnline(dialogsAndVideoIm.currentDialog.dialog_with_user.pk)"> 
+					<md-icon>videocam</md-icon>
+					<md-tooltip>Video call to user</md-tooltip>
+				</md-button>				
+				<md-button class="md-icon-button" ng-click="closeDialogMsg()"> 
+					<md-icon>close</md-icon>
+					<md-tooltip>Close</md-tooltip>
+				</md-button>
+			</div>
+			
+			<im-dialog-msg-editor with-user-pk="dialogsAndVideoIm.currentDialog.dialog_with_user.pk"> 
+			</im-dialog-msg-editor>
+
+			<im-dialog-msg-list with-user-pk="dialogsAndVideoIm.currentDialog.dialog_with_user.pk"> 
+			</im-dialog-msg-list>
+
+		</md-content>
+	</md-sidenav>
+
+{% endverbatim %}

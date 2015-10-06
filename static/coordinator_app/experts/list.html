@@ -1,0 +1,17 @@
+<div layout="column" layout-padding> 
+	<error ng-model="error"></error>
+	<ul class="list-inline nomargin"> 
+		<li class="nopadding"> 
+			<h6> Experts </h6>
+		</li>
+	</ul>
+	<md-card layout-padding ng-repeat="expert in expert_list">
+		<cw-expert-view-simple expert="expert"></cw-expert-view-simple>
+		<div class="md-actions" layout="row" layout-align="end center">
+			<md-button class="md-primary nomargin-top-bottom" 
+				ng-click="dialogsAndVideoIm.startChatWith(expert)">
+				Chat	
+			</md-button>				
+		</div>
+	</md-card>
+</div>

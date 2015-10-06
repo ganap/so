@@ -1,0 +1,22 @@
+<div layout="row"> 
+	<h6> Condition <span ng-if="bundle.entry.length-1>0 && !viewMode"> (+{{bundle.entry.length-1}})</span></h6>
+	<span flex></span>
+</div>		
+
+<p ng-if="error"> {{error}} </p>
+<div layout="row" ng-if="!viewMode">
+	<p ng-if="latest_condition">
+		<span ng-repeat="coding in latest_condition.code.coding">{{coding.display}} </span>
+	</p>
+	<span flex>  </span>
+	<p ng-show="latest_condition.onsetDate" class="fright">Date: {{latest_condition.onsetDate | date: 'd/ MMM /yyyy'}}</p>
+</div>
+<div ng-if="viewMode" layout="column"> 
+	<div ng-repeat="condition in bundle.entry" layout="row"> 					
+		<span>{{$index+1}}. </span>
+		<span ng-repeat="coding in condition.content.code.coding">{{coding.display}} </span>
+		<span flex>  </span>
+		<p ng-show="condition.content.onsetDate" class="fright">Date: {{condition.content.onsetDate | date: 'd/ MMM /yyyy'}}</p>
+	</div>
+</div>
+

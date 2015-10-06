@@ -1,0 +1,66 @@
+		<div layout="row" layout-sm="column">
+			<md-card layout="column" flex="50" flex-sm="100" layout-padding
+				style="margin-left:5px;">
+				<md-input-container layout="column" ng-if="create_new">
+					<label flex-order="1">Username</label>
+					<input required username-available name="username" ng-model="patient.username" type="text">
+					<div ng-messages="form.username.$error"  class="messages" >
+						<div ng-message="required">[required]</div>
+						<div ng-message="usernameExists">[already exists]</div>
+					</div>				
+				</md-input-container>
+
+				<md-input-container layout="column" ng-if="create_new">
+					<label flex-order="1">Email</label>
+					<input required email-available  name="email" ng-model="patient.email" type="email">
+					<div ng-messages="form.email.$error" class="messages" >
+						<div ng-message="required">[required]</div>
+						<div ng-message="email">[invalid email]</div>
+						<div ng-message="emailExists">[already exists]</div>
+					</div>				
+				</md-input-container>
+
+				<md-input-container layout="column" ng-if="!create_new">
+					<label flex-order="1">Username</label>
+					<input name="username" ng-model="patient.username" type="text" ng-disabled="true">
+				</md-input-container>
+
+				<md-input-container layout="column" ng-if="!create_new">
+					<label flex-order="1">Email</label>
+					<input name="email" ng-model="patient.email" type="email" ng-disabled="true">
+				</md-input-container>
+
+				<md-input-container ng-if="create_new">
+					<label>Password</label>
+					<input required name="password" ng-model="patient.password" type="password">
+					<div ng-messages="form.password.$error" class="messages" >
+						<div ng-message="required">[required]</div>
+					</div>
+				</md-input-container>
+
+				<md-input-container>
+					<label flex-order="1">Sex</label>
+					<const-select ng-model="patient.patient.gender" model-type="GENDER_TYPES"
+						flex-order="2"> 
+					</const-select>
+				</md-input-container>
+
+
+				<md-input-container>
+					<label flex-order="1">Marital Status</label>
+					<const-select ng-model="patient.patient.maritalStatus" model-type="MARITAL_STATUS_TYPES"
+						flex-order="2"> 
+					</const-select>
+				</md-input-container>
+
+				<bs-checkbox ng-model="patient.send_email" label="Send email with password and username to user"
+					ng-if="create_new"></bs-checkbox>
+			</md-card>
+
+			<cw-human-name human="patient.patient.name[0]" label="Name" 
+					hide-delete-btn="true"
+					hide-bottom-btns="true"
+					flex="49" flex-sm="100"
+					style="margin-left:5px;">
+			</cw-human-name>
+		</div>

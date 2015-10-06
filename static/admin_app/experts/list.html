@@ -1,0 +1,26 @@
+<div layout="column" layout-padding> 
+	<error ng-model="error"></error>
+	<ul class="list-inline nomargin"> 
+		<li class="nopadding"> 
+			<h6> Experts </h6>
+		</li>
+		<li> 
+			<md-button class="md-fab md-mini nomargin md-success"
+					ng-href="#/admin/experts/create/new">
+				    <md-icon>add</md-icon>
+					<md-tooltip>Create new expert</md-tooltip>
+			</md-button>				
+		</li>
+	</ul>
+	<md-card layout-padding ng-repeat="expert in expert_list">
+		<div ng-include="'/static/composite_widgets_app/expert/cwExpertViewSimple.html'"></div>
+		<div class="md-actions" layout="row" layout-align="end center" ng-if="!showEdit">
+			<md-button class="md-primary nomargin-top-bottom" ng-href="#/admin/experts/{{expert.pk}}">
+				Edit
+			</md-button>	
+			<md-button class="md-primary nomargin-top-bottom" ng-click="delete(expert.pk)">
+				Delete
+			</md-button>	
+		</div>
+	</md-card>
+</div>

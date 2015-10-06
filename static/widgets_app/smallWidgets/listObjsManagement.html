@@ -1,0 +1,46 @@
+<style> 
+.list-objs-management > .label-info{
+	margin-right: 0.5em;
+	margin-bottom: 0.3em;
+	display: inline-block;
+	padding: 8px;
+	font-size:95%;
+}
+.list-objs-management > .label-info:hover{
+	background-color: #E51C23;
+    text-decoration: line-through;
+}
+.list-objs-management > .list-inline{
+	display:inline-block;
+}
+</style>
+
+<small>{{ helpText || 'This is a list of values, please select the correct once from the dropdown and press "Add" button. Please click on the tagged label to remove the odd value.'}}</small>
+<div class="list-objs-management"> 
+	<a  href="javascript:void(0)" class="label label-info" ng-repeat="obj in listObjs"
+		ng-click="removeObj(obj)">
+		{{const.getKeyByVal(constType,obj) || obj}}
+	</a>
+	<ul class="list-inline"> 
+		<li> 
+			<const-select ng-model="newObj" model-type="{{constType}}"> 
+			</const-select>
+		</li>
+		<li ng-show="newObj=='<CUSTOM>'"> 
+			<input type="text" ng-model="customObj" style="vertical-align: middle;">
+		</li>
+		<li ng-hide="newObj=='<CUSTOM>'"> 
+			<button class="btn btn-link btn-sm" ng-click="addObj()"
+				ng-disabled="isObjInList(newObj)">
+				ADD
+			</button>
+		</li>
+		<li ng-show="newObj=='<CUSTOM>'"> 
+			<button class="btn btn-link btn-sm" ng-click="addCustomObj()"
+				ng-disabled="isObjInList(customObj) || !customObj.length">
+				ADD
+			</button>
+		</li>
+	</ul>
+</div>
+

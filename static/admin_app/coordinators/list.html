@@ -1,0 +1,29 @@
+<div layout="column" layout-padding> 
+	<error ng-model="error"></error>
+	<ul class="list-inline nomargin"> 
+		<li class="nopadding"> 
+			<h6> Coordinators </h6>
+		</li>
+		<li> 
+			<md-button class="md-fab md-mini nomargin md-success"
+					ng-href="#/admin/coordinators/create/new">
+				    <md-icon>add</md-icon>
+					<md-tooltip>Create new coordinator</md-tooltip>
+			</md-button>				
+		</li>
+	</ul>
+	<md-card layout-padding ng-repeat="coordinator in coordinator_list">
+		<b>{{coordinator.username}}</b>
+		<p> {{coordinator.email}} </p>
+		<div class="md-actions" layout="row" layout-align="end center" ng-if="!showEdit">
+			<!--
+			<md-button class="md-primary nomargin-top-bottom" ng-href="#/admin/coordinators/{{coordinator.pk}}">
+				Edit
+			</md-button>	
+			-->
+			<md-button class="md-primary nomargin-top-bottom" ng-click="delete(coordinator.pk)">
+				Delete
+			</md-button>	
+		</div>
+	</md-card>
+</div>

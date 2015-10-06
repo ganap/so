@@ -1,0 +1,41 @@
+<div layout="column" class="layout-margin"> 
+	<div ng-show="loading"> 
+		<br>
+		<br>
+		<spinner-loader ng-show="loading" label="Please wait..."></spinner-loader>
+	</div>
+
+
+	<form name="form_initial" ng-if="init && !loading"> 
+		<h6> To proceed please select the preferable measurement system type, and your weight and height </h6>
+
+		<md-radio-group ng-model="measurements.units">
+			<md-radio-button value="metric">Metric system (centimeter, kg, C)</md-radio-button>
+			<md-radio-button value="gb"> Imperial units (inch, pound, fahrenheit)</md-radio-button>
+		</md-radio-group>
+
+		<md-input-container>
+		<label>My height ({{'height' | units : measurements.units}})</label>
+		    <input type="number" min=1 name="height" step="any" ng-model="measurements.height">
+		    <div ng-messages="form_initial.height.$error">
+		        <div ng-message="number">[not a number]</div>
+			 </div>
+		 </md-input-container>		
+		<md-input-container>
+			<label>My weight ({{'weight' | units : measurements.units}})</label>
+		    <input type="number" min=1 name="weight" step="any" ng-model="measurements.body_mass" >
+		    <div ng-messages="form_initial.weight.$error">
+		        <div ng-message="number">[not a number]</div>
+			 </div>
+		 </md-input-container>			 
+		 <br>
+		<md-button class="md-raised md-primary md-success fright"
+			ng-click="create()">
+			NEXT
+		</md-button>
+
+	</form>
+
+	<div ng-include="'/static/users_app/measurements/dailyMeasurements.html'"></div>
+
+</div>

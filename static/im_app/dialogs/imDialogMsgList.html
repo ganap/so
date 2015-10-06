@@ -1,0 +1,23 @@
+<ul class="list-chats"> 
+	<li ng-repeat="msg in (dialogs = (dialogsAndVideoIm.dialogMsgListCache[withUserPk].dialogs | orderBy: '-timestamp'))"> 
+		<div class="chat chat-left" ng-if="msg.mail_type == 'I'">
+				<div class="chat-avatar" ng-if="dialogs[$index-1].mail_type!=msg.mail_type">
+					<img class="img-circle" src="/media_files/avatars/{{withUserPk}}-tiny.jpg">
+				</div>
+				<div class="chat-body" ng-class="{'without-triangle': dialogs[$index-1].mail_type==msg.mail_type}">
+					{{msg.text}}
+					<small>{{msg.timestamp | date:'medium'}}</small>
+				</div>
+		</div>
+		<div class="chat" ng-if="msg.mail_type == 'O'">
+				<div class="chat-avatar" ng-if="dialogs[$index-1].mail_type!=msg.mail_type">
+					<img class="img-circle" src="/media_files/avatars/{{userProfile.user.pk}}-tiny.jpg">
+				</div>
+				<div class="chat-body" ng-class="{'without-triangle': dialogs[$index-1].mail_type==msg.mail_type}">
+					{{msg.text}}
+					<small>{{msg.timestamp | date:'medium'}}</small>
+				</div>
+		</div>
+
+	</li>
+</ul>

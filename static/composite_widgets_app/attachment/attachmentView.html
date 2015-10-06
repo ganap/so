@@ -1,0 +1,18 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+	<div class="thumbnail" ng-class="{'dicom': attachment.ext=='.dcm' || attachment.ext=='.dicom'}">
+		<img ng-src="https://storage.googleapis.com/{{attachment.gcloud_path.bucket}}/{{attachment.gcloud_path.path}}" ng-if="attachment.ext=='.jpg'">
+		<div ng-if="attachment.ext=='.pdf'">
+			<iframe src="{{getPdfUrl() | urlUnsafe}}" class="pdf-viewer"></iframe>
+		</div>
+		<div ng-if="attachment.ext=='.txt'"> 
+			<text-viewer 
+				from-url="https://storage.googleapis.com/{{attachment.gcloud_path.bucket}}/{{attachment.gcloud_path.path}}">
+			</text-viewer>
+		</div>
+		<div ng-if="attachment.ext=='.dcm' || attachment.ext=='.dicom'">
+			<cw-dicom-view 
+				dicom-url="https://storage.googleapis.com/{{attachment.gcloud_path.bucket}}/{{attachment.gcloud_path.path}}">
+			</cw-dicom-view>
+		</div>
+	</div>
+</div>

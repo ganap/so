@@ -1,0 +1,68 @@
+<md-card layout-padding class="providerPatient nomargin" flex="50">
+
+<div ng-show="!editMode"> 
+	<b>
+		<span ng-repeat="coding in ngModel.name.coding">{{coding.display}} </span>
+	</b>
+	<div ng-if="ngModel.valueQuantity"> 
+		<b>Quantity:</b> <fd-value-quantity-view ng-model="ngModel.valueQuantity"></fd-value-quantity-view>
+	</div>
+	<p ng-if="ngModel.valueCodeableConcept">
+		<span ng-repeat="coding in ngModel.valueCodeableConcept">{{coding.display}}</span>
+	</p>
+	<p ng-show="ngModel.valueDateTime"><b>Date:</b> {{ngModel.valueDateTime | date: 'd/ MMM /yyyy'}}</p>
+	<p ng-if="ngModel.status"><b>Status:</b> {{const.getKeyByVal('OBSERVATION_STATUS_TYPES', ngModel.status)}}</p>
+	<p ng-if="ngModel.reliability"><b>Reliability:</b> {{const.getKeyByVal('OBSERVATION_RELIABILITY_TYPES', ngModel.reliability)}}</p>
+</div>
+
+<div ng-if="editMode" layout="row"> 
+	<div layout="column" layout-fill> 
+		<div layout="row"> 
+			<b> Observation type:</b>
+			<fd-coding ng-repeat="coding_c in ngModel.name.coding"
+				ng-model="coding_c" edit-mode="true"> 
+			</fd-coding>
+		</div>
+		<div layout="row" ng-if="ngModel.valueCodeableConcept"> 
+			<b> Result:</b>
+			<fd-coding ng-repeat="coding_c in ngModel.valueCodeableConcept.coding"
+				ng-model="coding_c" edit-mode="true"> 
+			</fd-coding>
+		</div>
+
+		<md-input-container> 
+			<label flex-order="0"> Status </label>
+			<const-select ng-model="ngModel.status" flex-order="1"
+				model-type="OBSERVATION_STATUS_TYPES"> 
+			</const-select>
+		</md-input-container>
+
+		<md-input-container> 
+			<label flex-order="0"> Reliability </label>
+			<const-select ng-model="ngModel.reliability" flex-order="1"
+				model-type="OBSERVATION_RELIABILITY_TYPES"> 
+			</const-select>
+		</md-input-container>
+
+
+	</div>
+	<div  flex ng-show="ngModel.appliesDateTime"></div>
+	<div layout="column" ng-show="ngModel.appliesDateTime">
+		<b> Date: </b>
+		<fd-date ng-model="ngModel.appliesDateTime" ng-if="ngModel.appliesDateTime"></fd-date>
+	</div>
+</div>
+
+<!--
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-primary nomargin-top-bottom" ng-click="editMode=true"
+			ng-show="!editMode">
+			Edit	
+		</md-button>	
+		<md-button class="md-primary nomargin-top-bottom" ng-click="editMode=false"
+			ng-show="editMode">
+			Hide Edit Mode	
+		</md-button>	
+	</div>
+	-->
+</md-card>

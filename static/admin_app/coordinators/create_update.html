@@ -1,0 +1,57 @@
+<div layout="column">
+	<h6 ng-if="create_new"> Create new coordinator </h6>
+	<h6 ng-if="!create_new">Update coordinator <b> {{coordinator.username}} </b></h6>
+
+
+	<form name="form"  accept-charset="utf-8" class="form-horizontal" 
+			layout="column"> 
+
+			<md-input-container layout="column" ng-if="create_new">
+				<label flex-order="1">Username</label>
+				<input required username-available name="username" ng-model="coordinator.username" type="text">
+				<div ng-messages="form.username.$error"  class="messages" >
+					<div ng-message="required">[required]</div>
+					<div ng-message="usernameExists">[already exists]</div>
+				</div>				
+			</md-input-container>
+
+			<md-input-container layout="column" ng-if="create_new">
+				<label flex-order="1">Email</label>
+				<input required email-available  name="email" ng-model="coordinator.email" type="email">
+				<div ng-messages="form.email.$error" class="messages" >
+					<div ng-message="required">[required]</div>
+					<div ng-message="email">[invalid email]</div>
+					<div ng-message="emailExists">[already exists]</div>
+				</div>				
+			</md-input-container>
+
+
+			<md-input-container ng-if="create_new">
+				<label>Password</label>
+				<input required name="password" ng-model="coordinator.password" type="password">
+				<div ng-messages="form.password.$error" class="messages" >
+					<div ng-message="required">[required]</div>
+				</div>
+			</md-input-container>
+
+			<md-input-container ng-if="create_new"> 
+		        <md-checkbox ng-model="coordinator.send_email" aria-label="Checkbox 1">
+					Send email with password and username to user
+		        </md-checkbox>				
+			</md-input-container>
+
+			<error ng-model="error"></error>
+			
+			<div class="md-actions" layout="row" layout-align="end center">
+				<md-button class="md-primary md-raised nomargin-top-bottom" ng-click="create()"
+					ng-if="create_new" ng-disabled="form.$invalid || disableForm">
+					Create
+				</md-button>	
+				<md-button class="md-primary md-raised nomargin-top-bottom" ng-click="update()"
+					ng-if="!create_new" ng-disabled="form.$invalid || disableForm">
+					Update
+				</md-button>	
+			</div>
+	</form>
+</div>
+

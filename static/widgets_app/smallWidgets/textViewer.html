@@ -1,0 +1,11 @@
+<div class="well" style="text-align: left;"> 
+	<div> 
+	<br>
+	<spinner-loader label="Downloading file..."
+		ng-show="loading">
+	</spinner-loader>
+	</div>
+	<p ng-repeat="line in lines track by $index" style="text-indent:2em;"> 
+	{{line}}
+	</p>
+</div>

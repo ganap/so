@@ -1,0 +1,8 @@
+<ul class="list-inline nomargin"> 
+	<li ng-repeat="smile in smileList"> 
+		<m-smile name="{{smile.name}}" type="{{smile.type}}" 
+			picked="$index==ngModel"
+			ng-click="setSmile($index)">
+		</m-smile>
+	</li>
+</ul>

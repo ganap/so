@@ -1,0 +1,89 @@
+<div class="panel panel-default ">
+	<div class="panel-heading">
+		<b class="text-primary">Patient Information</b>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				Patient Name: {{'x00100010' | dataDicom}}</span>
+			</div>
+			<div class="col-xs-6">
+				Patient ID: {{'x00100020' | dataDicom}}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Patient Birth Date: {{'x00100030' | dataDicom}}</span>
+			</div>
+			<div class="col-xs-6">
+				Patient Sex: {{'x00100040' | dataDicom}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<b class="text-primary">Study Information</b>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				Study Description: {{'x00081030' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Protocol Name: {{'x00181030' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Accession #: {{'x00080050' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Study Id: {{'x00200010' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Study Date: {{'x00080020' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Study Time: {{'x00080030' | dataDicom}}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<b class="text-primary">Series Information</b>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-6">
+				Series Description: {{'x0008103e' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Series #: {{'x00200011' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Modality: {{'x00080060' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Body Part: {{'x00180015' | dataDicom}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
+				Series Date: {{'x00080021' | dataDicom}}
+			</div>
+			<div class="col-xs-6">
+				Series Time: {{'x00080031' | dataDicom}}
+			</div>
+		</div>
+
+	</div>
+</div>

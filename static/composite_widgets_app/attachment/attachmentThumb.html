@@ -1,0 +1,9 @@
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"> 
+	<div class="thumbnail">
+		<img ng-src="https://storage.googleapis.com/{{attachment.gcloud_path.bucket}}/{{attachment.gcloud_path.path}}.thumbnail.jpg" ng-if="attachment.ext=='.jpg'">
+		<img src="/static/img/files/pdf.png" ng-if="attachment.ext=='.pdf'">
+		<img src="/static/img/files/txt.png" ng-if="attachment.ext=='.txt'">
+		<img src="/static/img/files/dicom.png" ng-if="attachment.ext=='.dcm'">
+		{{attachment.title | cut:false: 10}}
+	</div>
+</div>

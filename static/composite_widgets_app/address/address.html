@@ -1,0 +1,62 @@
+<md-card layout-padding>
+	<b ng-if="!showEdit">{{label}}</b>
+
+	<div ng-if="!showEdit"> 
+		<cw-address-view address="address"></cw-address-view>
+	</div>
+	<md-card-content ng-if="showEdit">
+
+		<form name="form_ad"  accept-charset="utf-8" class="form-horizontal" ng-show="showEdit"
+			layout="column"> 
+			<md-input-container layout="column">
+				<label flex-order="1">Use Type</label>
+				<const-select ng-model="address.use" model-type="ADDRESS_USE_TYPES"
+					flex-order="2"> 
+				</const-select>
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">Type</label>
+				<const-select ng-model="address.type_" model-type="ADDRESS_TYPE_TYPES"
+					flex-order="2"> 
+				</const-select>
+			</md-input-container>
+	
+			<md-input-container>
+				<label flex-order="1">Postal Code</label>
+				<input type="text" ng-model="address.postalCode" 
+							name="ad_postalcode" placeholder="Postal Code">
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">Country (required)</label>
+				<input type="text" ng-model="address.country" name="ad_country" required>
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">State</label>
+				<input type="text" ng-model="address.state" name="ad_state">
+			</md-input-container>
+
+			<md-input-container>
+				<label flex-order="1">City/Town (required)</label>
+				<input type="text" ng-model="address.city" name="ad_city" required>
+			</md-input-container>
+
+
+			<md-input-container>
+				<label flex-order="1">Line /street,direction, mailbox/ (required)</label>
+				<input type="text" ng-model="address.line[0]" name="ad_line" required>
+			</md-input-container>
+
+			<cw-period period="address.period" label="The period of time when the address was / is used">  </cw-period>
+
+		</form>
+
+	</md-card-content>
+
+	<div ng-include="'/static/composite_widgets_app/sharedEditDeleteBts+HideEditMode+Cancel.html'"></div>
+
+</md-card>
+
+	

@@ -1,0 +1,241 @@
+{% load site_tags %}
+<!DOCTYPE html>
+<!-- saved from url=(0047)http://dev-cancerinfohub.pantheon.io/about.html -->
+<html ng-app="App"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Cancer Info</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="http://dev-cancerinfohub.pantheon.io/styles.css">
+    <script src="/static/libs/bower_components/angular/angular.js"></script>
+    <script src="/static/libs/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/static/libs/bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="/static/libs/bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="/static/libs/bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="/static/libs/bower_components/angular-material/angular-material.min.js"></script>
+    <script src="/static/libs/bower_components/angular-messages/angular-messages.min.js"></script>
+    <link rel="stylesheet" href="/static/libs/bower_components/angular-material/angular-material.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'for_drupal_app' %}
+{% load_ng_app 'helpers' %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".sidenav").hover(
+  function () {
+    $('body').addClass("sidebar_open");
+  },
+  function () {
+    $('body').removeClass("sidebar_open");
+  }
+ );
+})
+	
+	</script>
+</head>
+<body class=""  ng-controller="AppCtrl">
+<div class="page">
+	<div class="sidenav">
+		<div class="sidenav-logo">
+			<a href="/home.html"><img src="http://dev-cancerinfohub.pantheon.io/pageimages/logo.png" alt="Home"></a>
+		</div>
+			{% if not user.is_authenticated %}
+			<ul class="top-menu">
+				<li>
+				<a href="/login" class="">
+					<i class="fa fa-sign-in"></i><span>Login</span>
+				</a>
+				</li>
+				<li>
+				<a href="/library" class="">
+					<i class="fa fa-book"></i><span>Library</span> 
+				</a>
+				</li>
+				<li> 
+				<a href="/about-so" class="" style="padding-left: 12px;text-decoration: none;">
+					<md-icon style="color:white;margin-right: 9px;" class="md-default-theme material-icons">supervisor_account</md-icon>
+					<span>Second Opinion</span> 
+				</a>
+				</li>
+			</ul>
+			<ul>
+				<li class="active">
+				<a href="/about.html" class="">
+					<i class="fa fa-info-circle"></i><span>About</span>
+				</a>
+				</li>
+				<li class="">
+				<a href="/team.html" class="">
+					<i class="fa fa-users"></i><span>Team</span>
+				</a>
+				</li>
+				<li>
+				<a href="/Contact" class="">
+					<i class="fa fa-phone-square"></i><span>Contact</span>
+				</a>
+				</li>
+			</ul>
+			{% endif %}
+			{% if user.is_authenticated %}
+				{% if not user.is_expert and not user.is_moderator and not user.is_admin %}
+					{% include 'menu/patient.html'%}
+				{% endif %}
+				{% if  user.is_moderator %}
+					{% include 'menu/moderator.html'%}
+				{% endif %}
+				{% if  user.is_admin %}
+					{% include 'menu/admin.html'%}
+				{% endif %}
+				{% if  user.is_expert %}
+					{% include 'menu/expert.html'%}
+				{% endif %}
+			{% endif %}
+	</div>
+	<div class="content-area">
+		<h1 class="heading mbot40 mtop100">We help patients and health professionals to improve the quality and efficiency of care.</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card height-8 card-underline">
+					<div class="card-head">
+						<header>Patients</header>
+					</div>
+					<div class="card-body">
+						<ul class="height-4">
+							<li>Get up-to-date information about your condition.</li>
+							<li>Find matching clinical trials and experts.</li>
+							<li>Organize your health and medical information in one central location.</li>
+							<li>Get a second opinion from a leading expert treating your specific condition.</li>
+						</ul>
+						<div class="text-right"><a class="btn" data-toggle="modal" data-target="#patientModal">Learn More »</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card height-8 card-underline">
+					<div class="card-head">
+						<header>Health Professionals</header>
+					</div>
+					<div class="card-body">
+						<ul class="height-4">
+							<li>Find up-to-date information about all diseases(details, treatment protocols, clinical trials etc.) easily. </li>
+							<li>Easily engage with your patients using latest tools and technologies.</li>
+							<li>Collaborate with leading experts of specific disease types.</li>
+						</ul>
+						<div class="text-right"><a class="btn" data-toggle="modal" data-target="#healthproModal">Learn More »</a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<div class="footer-content">
+			<p class="social">
+			Follow us on 
+			<a href="javascript:void()">Twitter</a>,
+			<a href="javascript:void()">Facebook</a>, and
+			<a href="javascript:void()">Google+</a>
+			</p>
+			<p class="copyright">© 2015 Hygeiais <em>/</em> All rights reserved <em>/</em> <a href="http://dev-cancerinfohub.pantheon.io/privacy.html">Privacy Policy</a> <em>/</em> <a href="http://dev-cancerinfohub.pantheon.io/tnc.html">Terms &amp; Conditions</a></p>
+		</div>
+	</footer>
+</div>
+<!-- START SIMPLE MODAL MARKUP -->
+<div class="modal" id="patientModal" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 class="modal-title" id="simpleModalLabel">Patient</h3>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="/about.html#uptodate"><i class="fa fa-info"></i><br>Up to date information</a></li>
+					<li><a data-toggle="tab" href="/about.html#organized"><i class="fa fa-calendar-plus-o"></i><br>Get organized</a></li>
+					<li><a data-toggle="tab" href="/about.html#careteam"><i class="fa fa-users"></i><br>Care team</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="uptodate" class="tab-pane fade in active">
+						<h3>Learn about your condition, treatment options and medications </h3>
+						<p>
+						Accurate up to date information gives you the confidence to ask your physician and other members of the healthcare team the right questions. This results in better outcome for your care. You can also find latest research publications and news articles and genetic information about your condition. In addition, hygeiais helps you find matching clinical trials and connect with the investigators running the trial. 
+						</p>
+						<p class="text-center">
+						<img src="http://dev-cancerinfohub.pantheon.io/pageimages/uptodate-info.png" width="800">
+						</p>
+					</div>
+					<div id="organized" class="tab-pane fade">
+						<h3>Organize your health and medical information</h3>
+						<p>You can manage all your of health and medical related content in one place, which can be shared with your care team without going through the hassle of calling your doctor's office every time. </p>
+						<ul>
+							<li>Record your vitals, moods, side effects and treatment details daily. </li>
+							<li>Set reminders for your appointments and medications.</li>
+							<li>Maintain a calendar of medications and other events.</li>
+							<li>Receive your doctor visit summaries automatically or upload those copies. </li>
+							<li>Aggregate data from all your health and medical devices into one central place. </li>
+							<li>Export summary of your health and medical information and provide them for a doctor who cannot access your hygeiais health summary. </li>
+						</ul>
+						<p class="text-center">
+						<img src="http://dev-cancerinfohub.pantheon.io/pageimages/getorganized.png" width="800">
+						</p>
+					</div>
+					<div id="careteam" class="tab-pane fade">
+						<h3>Engage with your care team </h3>
+						<p>Engaging with your Doctor and healthcare team to give them a complete picture of your heath and medical history leads to better outcomes and fewer errors.</p><p>Sharing your health information electronically helps you obtain second opinion from top experts anywhere in the world in a matter of few days. In addition, this helps your care team to be on the cutting edge of treatment protocols.</p>
+						<p class="text-center">
+						<img src="http://dev-cancerinfohub.pantheon.io/pageimages/careteam.png" width="800">
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer text-center"><button class="btn btn-primary">Sign Up</button></div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal" id="healthproModal" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h3 class="modal-title" id="simpleModalLabel">Health Professional</h3>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="/about.html#community"><i class="fa fa-medkit"></i><br>Community support</a></li>
+					<li><a data-toggle="tab" href="/about.html#opinions"><i class="fa fa-comment"></i><br>Second opinions</a></li>
+				</ul>
+				<div class="tab-content">
+					<div id="community" class="tab-pane fade in active">
+						<h3>Get support and encouragement from the community</h3>
+						<p>Get support from the community of other patients and discussion forums and families who share similar experience as yours. Sharing your story helps someone who was just diagnosed with a similar condition in navigating through the disease.</p>
+						<p class="text-center">
+						<img src="http://dev-cancerinfohub.pantheon.io/pageimages/community.png" width="800">
+						</p>
+					</div>
+					<div id="opinions" class="tab-pane fade">
+						<h3>Obtain a second opinion from a leading expert for your condition</h3>
+						<p>Hygeiais with its proprietary algorithm has built a directory of experts specifically treating your condition. We help you get a second opinion from some of these experts who are conducting research in this area at leading institutions in the world. The Hygeias team of healthcare professionals is there to support you every step of the way, from scheduling appointments, collecting and digitizing your medical records, and following up on your care to make sure you are on the right path. In most cases, you can connect with the specialist via a video call and get your questions answered. </p>
+						<p class="text-center">
+						<img src="http://dev-cancerinfohub.pantheon.io/pageimages/secondopinion.png" width="800">
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer text-center"><button class="btn btn-primary">Sign Up</button></div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- END SIMPLE MODAL MARKUP -->
+
+
+
+</body></html>

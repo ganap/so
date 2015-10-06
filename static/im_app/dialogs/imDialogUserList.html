@@ -1,0 +1,15 @@
+<md-list>
+	<md-list-item class="md-2-line" 
+		ng-repeat="(key,dialog) in dialogsAndVideoIm.dialogList | orderBy: '-last_msg_timestamp'"
+		ng-click="userDialogClick(dialog)">
+		<img ng-src="/media_files/avatars/{{dialog.dialog_with_user.pk}}-tiny.jpg" class="md-avatar"/>
+        <div class="md-list-item-text">
+			<h3>{{dialog.dialog_with_user.username}}</h3>
+			<p ng-if="dialog.unreaded_count && !dialogsAndVideoIm.isUserPkOnline(dialog.dialog_with_user.pk)">+{{dialog.unreaded_count}} New Messages</p>
+			<p ng-if="dialog.unreaded_count && dialogsAndVideoIm.isUserPkOnline(dialog.dialog_with_user.pk)">
+				<span ng-if="dialog.unreaded_count">(+{{dialog.unreaded_count}})</span>
+				Online
+			</p>
+        </div>
+	</md-list-item>
+</md-list>

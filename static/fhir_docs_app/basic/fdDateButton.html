@@ -1,0 +1,11 @@
+<div layout="row"> 
+	<div layout="column"> 
+		<md-button ng-click="editMode=!editMode" class="nomargin"
+			ng-disabled="ngDisabled"> 
+			<md-icon>event_note</md-icon>
+			 {{ (ngModel | date: 'd/ MMM /yyyy') || 'Pick date'}}
+		</md-button>
+		<datetime-picker date="ngModel" ng-show="editMode" ></datetime-picker>
+	</div>
+	<span flex></span>
+</div>

@@ -1,0 +1,9 @@
+<div ng-show="!editMode"> 
+	{{ngModel.display}}
+</div>
+<div ng-show="editMode"> 
+	<a href="javascript:void(0)" ng-click="runEditDialog()"  style="padding-left:2px;"
+		ng-disabled="ngDisabled">
+		<b>{{ngModel.display}}</b>
+	</a>
+</div>

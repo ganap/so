@@ -1,0 +1,38 @@
+<!--
+<p> 
+Use Type: <span class="text-primary">{{const.getKeyByVal('ADDRESS_USE_TYPES',address.use)}}</span>
+</p>
+<p> 
+Type: <span class="text-primary">{{const.getKeyByVal('ADDRESS_TYPE_TYPES',address.type_)}}</span>
+</p>
+<p ng-show="address.postalCode"> 
+Postal Code:  <span class="text-primary">{{address.postalCode}}</span>
+</p>
+<p> 
+Country: <span class="text-primary">{{address.country}}</span>
+</p>
+<p ng-show="address.state"> 
+State: <span class="text-primary"> {{address.state}} </span>
+</p>
+<p> 
+City/Town: <span class="text-primary"> {{address.city}} </span>
+</p>
+<p> 
+Line: <span class="text-primary" ng-repeat="l in address.line"> {{l}} </span>
+</p>
+<p ng-if="address.period.start || address.period.end">
+Period: 
+<cw-period-view period="address.period"></cw-period-view>
+</p>
+-->
+
+<p ng-repeat="l in address.line" ng-if="address.line.length"> {{l}} </p>
+<p ng-if="address.city.length"> 
+	{{address.city}}<span ng-if="address.postalCode.length">, {{address.postalCode}}</span> 
+</p>
+<p ng-if="address.state.length"> {{address.state}} </p>
+<p ng-if="address.country.length"> {{address.country}} </p>
+<p ng-if="address.period.start.length || address.period.end.length">
+Period: 
+<cw-period-view period="address.period"></cw-period-view>
+</p>

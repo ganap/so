@@ -1,0 +1,47 @@
+<div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3"> 
+	<error ng-model="userProfile.error"></error>
+
+
+	<h4>  Please select the profile type: organization or individual patient </h4>
+
+	<br>
+	<p> The profile type could not be changed later. </p>
+	<br>
+
+	<div class="media media-radio" ng-click="profile_type='P'">
+		<div class="media-left">
+			<img class="media-object" src="/static/img/register/human.png">
+		</div>
+		<div class="media-body">
+			<div class="radio">
+				<label>
+					<input type="radio" name="optionsRadios" ng-model="profile_type" value="P">
+					This is a patient's profile
+				</label>
+			</div>
+			<small> (тут краткое описание что это такое и что дает. от заказчика).  Еще какое-то описание бла-бла.... </small>
+		</div>
+	</div>
+
+	<div class="media media-radio" ng-click="profile_type='O'">
+		<div class="media-left">
+			<img class="media-object" src="/static/img/register/hospital-building.png">
+		</div>
+		<div class="media-body">
+			<div class="radio">
+				<label>
+					<input type="radio" name="optionsRadios" ng-model="profile_type" value="O">
+					This is profile of an organization.	
+				</label>
+			</div>
+			<small> Описание профиля организации ... лдалд выал выавыаыв ываоывол.</small>
+		</div>
+	</div>
+
+	<button class="btn btn-success fright" ng-click="next()">
+		NEXT
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</button>
+	<br>
+	<br>
+</div>

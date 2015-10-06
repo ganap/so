@@ -1,0 +1,27 @@
+<div layout="row" ng-if="!editMode"> 
+	<b style="padding-right:0.2em;"> 
+		<fd-value-quantity ng-model="ngModel.doseQuantity"></fd-value-quantity>
+	</b>
+	(<fd-timing ng-model="ngModel.timingSchedule"></fd-timing>)
+</div>
+<div layout="column" ng-if="editMode"> 
+	<div layout="row" ng-if="simpleMode" style="padding-left:8px;"> 
+		<b style="margin-right:0.5em;" class="text-primary"> Dosage </b>
+		<input type="number" ng-model="ngModel.doseQuantity.value" 
+			style="max-width:4.4em;margin-right:0.5em;" class="center"
+			ng-disabled="ngDisabled">
+		<b style="margin-right:0.5em;" class="text-primary"> Units </b>
+		<input type="text" ng-model="ngModel.doseQuantity.units" 
+			style="max-width:3em; margin-right:0.5em;" class="center"
+			ng-disabled="ngDisabled">
+	</div>
+	<div layout="row" ng-if="!simpleMode" style="padding-left:8px;">
+		<b class="text-primary"> Dosage: </b>
+		<fd-value-quantity ng-model="ngModel.doseQuantity" edit-mode="true"
+			ng-disabled="ngDisabled">
+		</fd-value-quantity>
+	</div>
+	<fd-timing ng-model="ngModel.timingSchedule" edit-mode="true"
+		ng-disabled="ngDisabled">
+	</fd-timing>
+</div>

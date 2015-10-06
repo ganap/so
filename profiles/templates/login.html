@@ -1,0 +1,74 @@
+{% extends "main_app_base.html" %}
+{% load site_tags %}
+
+
+{% block angular_app %}
+<html lang="en" ng-app="App">
+{% endblock %}
+
+{% block css_js_load %}
+{{block.super}}
+
+<link rel='stylesheet prefetch' href='/static/libs/login/css/gubja.css'>
+<link rel='stylesheet prefetch' href='/static/libs/login/css/yaozl.css'>
+<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/static/libs/login/css/style.css">
+<link rel="stylesheet" href="/static/libs/login/login.css"> 
+{% load_ng_app 'widgets_app' %}
+{% load_ng_app 'material_helpers_app' %}
+{% load_ng_app 'login_register_app' %}
+
+{% endblock %}
+
+{% block css_paper %}
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container" ng-controller="loginCtrl">
+	<div id="login" class="signin-card">
+		<div class="logo-image">
+			<a href="/home.html"> 
+				<img src="/static/img/logo_small.png" alt="Logo" title="Logo" >
+			</a>
+		</div>
+		<a href="/home.html" style="text-decoration:none;"> 
+			<h1 class="display1">Hygeiais</h1>
+		</a>
+		<p class="subhead">Login</p>
+		<form >
+			<div ng-show="error" class="center"> 
+				<b class="text-danger">{% verbatim %}{{error}}{% endverbatim %}</b>
+			</div>
+			<div id="form-login-username" class="form-group">
+				<input id="username" class="form-control login-username" name="username" type="text" size="18" alt="login" ng-model="user.username">
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="username" class="float-label">Username</label>
+			</div>
+			<div id="form-login-password" class="form-group">
+				<input id="passwd" class="form-control login-password" name="password" type="password" size="18" alt="password" ng-model="user.password">
+				<span class="form-highlight"></span>
+				<span class="form-bar"></span>
+				<label for="password" class="float-label">Password</label>
+			</div>
+			<div layout="column">
+				<button class="btn btn-block btn-info ripple-effect" 
+					ng-click="login()" ng-disabled="!user.username || !user.password">
+					Sign in
+				</button>  
+				<div layout="row" class="forgot-password-registration" layout-fill> 
+					<forgot-password-link> 
+					</forgot-password-link>
+					<a class="btn btn-block btn-info ripple-effect" href="/register">
+						Register	
+					</a>  
+				</div>
+			</div>
+
+		</div>
+	</form>
+</div>
+</div>
+{% endblock %}

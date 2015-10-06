@@ -1,0 +1,19 @@
+<div ng-repeat="o in obj_list"> 
+	<p ng-if="o.type=='text'">
+		{{fieldsName[o.name]}}: <span class="text-primary">{{o.value}}</span>
+	</p>
+	<p ng-if="o.type=='datetime'">
+		{{fieldsName[o.name]}}: <span class="text-primary">{{o.value | date: 'MMM d, y h:mm:ss a'}}</span>
+	</p>
+	<p ng-if="o.type=='email'">
+		{{fieldsName[o.name]}}: <a href="mailto:{{o.value}}">{{o.value}}</a>
+	</p>
+	<p ng-if="o.type=='url'">
+		{{fieldsName[o.name]}}: <a href="{{o.value}}">{{o.value}}</a>
+	</p>
+	<p ng-if="o.type=='period'">
+		{{fieldsName[o.name]}}: 
+		<span class="text-primary" ng-show="o.value.start">C {{o.value.start | date: 'MMM d, y h:mm:ss a'}};</span>
+		<span class="text-primary" ng-show="o.value.end">По {{o.value.end | date: 'MMM d, y h:mm:ss a'}};</span>
+	</p>
+</div>

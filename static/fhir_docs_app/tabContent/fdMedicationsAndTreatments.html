@@ -1,0 +1,48 @@
+<div layout="row" layout-align="start center" ng-if="location!='main'"> 
+	<md-button class="md-icon-button" ng-click="goBack()"> 
+		<md-icon>arrow_back</md-icon>
+	</md-button>
+	<h6 class="nomargin" style="margin-top: 4px !important;">{{location | varToText}}</h6>
+</div>
+Hello{{patient.fhir_doc}}
+<div ng-repeat="(key, bundle) in patient.fhir_doc" ng-show="location=='main'"> 
+	Hello2
+	{{key}}
+	<fd-medication-prescription-summary-custom bundle="bundle" ng-if="key=='MedicationPrescription'"
+		on-add-click="onAddMedication()"  kiosk-mode="kioskMode">
+	</fd-medication-prescription-summary-custom>	
+	<fd-treatment-summary-custom bundle="bundle" ng-if="key=='Treatment'"
+		on-add-click="onAddTreatment()" kiosk-mode="kioskMode">
+	</fd-treatment-summary-custom>		
+</div>
+
+<div>
+	<div layout="row" layout-sm="column"  ng-repeat="obj in patient.fhir_doc.MedicationPrescription.entry" 
+			ng-if="location=='MedicationPrescription'"
+			layout-padding class="nopadding">
+		<fd-medication-prescription-custom ng-model="patient.fhir_doc.MedicationPrescription.entry[$index*2].content" 
+			flex="50" flex-sm="100" edit-mode="true"
+			ng-if="patient.fhir_doc.MedicationPrescription.entry[$index*2].content"
+			ng-disabled="kioskMode">
+		</fd-medication-prescription-custom>		
+		<fd-medication-prescription-custom ng-model="patient.fhir_doc.MedicationPrescription.entry[$index*2+1].content" 
+			flex="50" flex-sm="100" edit-mode="true"
+			nd-disabled="kioskMode"
+			ng-if="patient.fhir_doc.MedicationPrescription.entry[$index*2+1].content">
+		</fd-medication-prescription-custom>	
+	</div>
+
+	<div layout="row" layout-sm="column"  ng-repeat="obj in patient.fhir_doc.Treatment.entry" 
+			ng-if="location=='Treatment'"
+			layout-padding class="nopadding">
+		<fd-treatment-custom ng-model="patient.fhir_doc.Treatment.entry[$index*2].content" 
+			flex="50" flex-sm="100" edit-mode="true"
+			ng-if="patient.fhir_doc.Treatment.entry[$index*2].content">
+		</fd-treatment-custom>		
+		<fd-treatment-custom ng-model="patient.fhir_doc.Treatment.entry[$index*2+1].content" 
+			flex="50" flex-sm="100" edit-mode="true"
+			ng-if="patient.fhir_doc.Treatment.entry[$index*2+1].content">
+		</fd-treatment-custom>	
+	</div>
+
+</div>	

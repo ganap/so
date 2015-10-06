@@ -1,0 +1,15 @@
+<div layout="column" layout-padding> 
+	<md-card layout-padding> 
+		<h6>Create Patient profile </h6>
+		<md-radio-group ng-model="user_type">
+	      <md-radio-button value="new">New</md-radio-button>
+		  <md-radio-button value="fhir"> Import from an existing EMR</md-radio-button>
+	    </md-radio-group>
+	</md-card>
+
+	<div class="md-actions" layout="row" layout-align="end center">
+		<md-button class="md-raised md-success" ng-click="next()"> 
+			NEXT
+		</md-button>
+	</div>
+</div>
